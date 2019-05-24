@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    tools:context=".Fragment.TrangChuFragment"
+    android:id="@+id/fragment_trang_chu">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp">
+            <!--<fragment-->
+            <!--android:name="com.example.ordermilktea.Fragment.QuangCaoFragment"-->
+            <!--android:id="@+id/fragmentquangcao"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_quang_cao"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <LinearLayout
+                android:elevation="1dp"
+                android:layout_margin="10dp"
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_suggest"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <LinearLayout
+                android:elevation="1dp"
+                android:layout_margin="10dp"
+                android:background="#fff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/fragment_favorite"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+            <!--<fragment-->
+            <!--android:name="com.example.ordermilktea.Fragment.SuggestFragment"-->
+            <!--android:id="@+id/fragmentsuggest"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"/>-->
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

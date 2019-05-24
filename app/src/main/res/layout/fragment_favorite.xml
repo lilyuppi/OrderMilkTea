@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    tools:context=".Fragment.FavoriteFragment">
+
+    <RelativeLayout
+        android:padding="8dp"
+        android:id="@+id/relativesuggest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#101010"
+            android:id="@+id/textviewtitleAlbum"
+            android:text="Yêu thích"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/textviewxemthemfavorite"
+            android:textColor="#03A9F4"
+            android:textSize="15sp"
+            android:layout_alignParentRight="true"
+            android:text="Xem thêm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/relativesuggest"
+        android:id="@+id/recyclerviewFavorite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

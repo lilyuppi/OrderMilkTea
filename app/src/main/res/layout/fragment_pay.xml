@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.PayFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerviewPayFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+                <TextView
+                    android:id="@+id/tong_tien"
+                    android:gravity="center"
+                    android:text="Tổng cộng:"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:layout_toRightOf="@id/tong_tien"
+                    android:id="@+id/tong_so_luong"
+                    android:textColor="#000"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:text="1"
+                    android:layout_width="20dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:layout_toRightOf="@id/tong_so_luong"
+                    android:text="phần"
+                    android:gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:gravity="center"
+                    android:id="@+id/tong_tien_tra"
+                    android:layout_alignParentRight="true"
+                    android:text="100,000đ"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:layout_below="@id/tong_tien"
+                    android:text="Phí vận chuyển"
+                    android:id="@+id/phi_van_chuyen"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:gravity="center"
+                    android:layout_below="@id/tong_tien"
+                    android:id="@+id/tien_ship"
+                    android:layout_alignParentRight="true"
+                    android:text="15,000đ"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_below="@id/phi_van_chuyen"
+                    android:text="Tổng cộng:"
+                    android:id="@+id/sum"
+                    android:layout_width="130dp"
+                    android:layout_height="30dp" />
+                <TextView
+                    android:gravity="center"
+                    android:layout_below="@id/phi_van_chuyen"
+                    android:id="@+id/sum_tien"
+                    android:layout_alignParentRight="true"
+                    android:text="15,000đ"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

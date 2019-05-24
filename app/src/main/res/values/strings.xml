@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Order Milk Tea</string>
+    <string name="facebook_application_id" translatable="false">377059156216342</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb377059156216342</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="topping_1">Chân châu trắng</string>
+    <string name="topping_2">Chân châu đen</string>
+    <string name="topping_3">Thạch nha đam</string>
+    <string name="topping_4">Pudding trứng</string>
+    <string name="topping_5">Kem cheese</string>
+    <string name="sugar_100">100% đường</string>
+    <string name="sugar_75">75% đường</string>
+    <string name="sugar_50">50% đường</string>
+    <string name="sugar_25">25% đường</string>
+    <string name="sugar_0">0% đường</string>
+    <string name="ice_100">100% đá</string>
+    <string name="ice_75">75% đá</string>
+    <string name="ice_50">50% đá</string>
+    <string name="ice_25">25% đá</string>
+    <string name="ice_0">0% đá</string>
+</resources>
