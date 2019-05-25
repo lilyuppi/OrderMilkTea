@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative_layout_suggest">
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="0dp"
+        android:id="@+id/imageviewsuggest_card">
+
+        <ImageView
+            android:id="@+id/imageviewsuggest"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher_background" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:text="Nam Hot"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:textColor="#100f0f"
+        android:maxLines="1"
+        android:layout_toRightOf="@id/imageviewsuggest_card"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:id="@+id/textviewsuggest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/diachi"
+        android:elevation="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textviewsuggest"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/imageviewsuggest_card"
+        android:maxLines="1"
+        android:text="Hải Phòng"
+        android:textColor="#AFA3A3"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/ic_up"
+        android:layout_width="10dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/diachi"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/imageviewsuggest_card"
+        android:background="@drawable/ic_up"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/sale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/diachi"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/imageviewsuggest_card"
+        android:maxLines="1"
+        android:text="30%"
+        android:textColor="#EE3333"
+        android:textSize="13sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/airPay"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/diachi"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/imageviewsuggest_card"
+        android:background="@drawable/airpay"
+        android:maxLines="1" />
+
+    <ImageView
+        android:id="@+id/freeShip"
+        android:layout_width="150dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/diachi"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/imageviewsuggest_card"
+        android:background="@drawable/freeship"
+        android:maxLines="1" />
+</RelativeLayout>

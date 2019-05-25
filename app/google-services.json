@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "803615957171",
+    "firebase_url": "https://milk-tea-dbf61.firebaseio.com",
+    "project_id": "milk-tea-dbf61",
+    "storage_bucket": "milk-tea-dbf61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:803615957171:android:9d1058dc968d7cbe",
+        "android_client_info": {
+          "package_name": "com.example.ordermilktea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "803615957171-bep379r1bknklki2erdqaq514v7psuqe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ordermilktea",
+            "certificate_hash": "77e3a7636595cc757d9ca728f46e558969ff750b"
+          }
+        },
+        {
+          "client_id": "803615957171-0ih8u7vldipnnbn36dtvh4k3ai2gdg6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDStJasdcO0ySsSKh40IMRawDFNYsrF1Bk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "803615957171-0ih8u7vldipnnbn36dtvh4k3ai2gdg6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
