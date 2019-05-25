@@ -37,14 +37,11 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_sheet_add, container, false);
-        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         map(v);
         listener();
         getBundle();
         return v;
     }
-
-
 
     private void listener() {
         imvSub.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +252,7 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
             Glide.with(this).load(milkTea.getImgSrc()).into(imvMilkTea);
         }
     }
+
 
     public interface OnToppingSelectedListener {
         void onToppingSelected(MilkTeaInCart milkTeaInCart);

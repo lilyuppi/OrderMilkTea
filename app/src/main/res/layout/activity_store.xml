@@ -123,9 +123,10 @@
             android:layout_height="match_parent"
             android:background="#0097A7"
             android:gravity="center_vertical"
+            android:id="@+id/thanhtoan"
             >
             <TextView
-                android:textSize="18sp"
+                android:textSize="20sp"
                 style="@style/TextAppearance.AppCompat.Title.Inverse"
                 android:text="Thanh toán"
                 android:layout_width="wrap_content"
@@ -137,7 +138,7 @@
         </LinearLayout>
 
         <TextView
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:paddingLeft="10dp"
             android:text="1 món"
             android:textStyle="normal"

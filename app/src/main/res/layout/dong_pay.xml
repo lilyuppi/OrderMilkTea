@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="30dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <TextView
+            android:id="@+id/so_luong_san_pham"
+            android:textSize="15sp"
+            android:textColor="#1B688A"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="1"
+            android:layout_width="30dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:gravity="center_vertical"
+            android:id="@+id/ten_san_pham"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:text="Combo tra sữa Royaltea"
+            android:ellipsize="end"
+            android:maxWidth="150dp"
+            android:layout_toRightOf="@id/so_luong_san_pham"
+            android:layout_width="150dp"
+            android:layout_height="match_parent" />
+        <TextView
+        android:id="@+id/sugar_ice_topping"
+        android:gravity="center_vertical"
+        android:textSize="12sp"
+        android:maxWidth="120dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="100% đường, 100%đá"
+        android:layout_toRightOf="@id/ten_san_pham"
+        android:layout_width="120dp"
+        android:layout_height="match_parent" />
+        <TextView
+            android:gravity="right|center"
+            android:text="100,000"
+            android:id="@+id/money"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/sugar_ice_topping"
+            android:layout_width="80dp"
+            android:layout_height="100dp" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -37,7 +37,6 @@ public class FavoriteFragment extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3,LinearLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
         mListStore = (ArrayList<Store>) getArguments().getSerializable("store");
-        getArguments().remove("store");
         ArrayList<Store> list = new ArrayList<>();
         for (int i = 0; i < mListStore.size(); i++) {
             list.add(mListStore.get(i));
@@ -55,7 +54,6 @@ public class FavoriteFragment extends Fragment {
                 bundle.putSerializable("store", store);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.anim_slide_in_from_right, R.anim.anim_slide_out_to_left);
             }
         });
         return view;

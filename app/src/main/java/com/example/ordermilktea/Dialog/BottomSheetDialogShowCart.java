@@ -1,6 +1,7 @@
 package com.example.ordermilktea.Dialog;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.ordermilktea.Activity.PayActivity;
 import com.example.ordermilktea.Adapter.MilkTeaInCartAdapter;
 import com.example.ordermilktea.Model.Cart;
 import com.example.ordermilktea.Model.MilkTea;
@@ -34,7 +36,6 @@ public class BottomSheetDialogShowCart extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_sheet_cart, container, false);
-        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         map(v);
         getBundle();
         initRecyclerView(v);

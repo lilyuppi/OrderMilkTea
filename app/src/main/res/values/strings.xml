@@ -3,9 +3,6 @@
     <string name="facebook_application_id" translatable="false">377059156216342</string>
     <string name="facebook_login_protocol_scheme" translatable="false">fb377059156216342</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="search">Tìm kiếm</string>
-    <string name="airpay">Airpay</string>
-    <string name="freeship">Free Ship</string>
     <string name="topping_1">Chân châu trắng</string>
     <string name="topping_2">Chân châu đen</string>
     <string name="topping_3">Thạch nha đam</string>
@@ -21,4 +18,5 @@
     <string name="ice_50">50% đá</string>
     <string name="ice_25">25% đá</string>
     <string name="ice_0">0% đá</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

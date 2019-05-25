@@ -1,5 +1,6 @@
 package com.example.ordermilktea.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +21,6 @@ import com.example.ordermilktea.Model.Cart;
 import com.example.ordermilktea.Model.MilkTea;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
-import com.example.ordermilktea.OnSwipeTouchListener;
 import com.example.ordermilktea.R;
 
 import java.text.NumberFormat;
@@ -30,9 +30,10 @@ import java.util.Locale;
 public class StoreActivity extends AppCompatActivity {
     private ImageView imvBackDrop;
     private TextView tvTest, tvSumPrice, tvSumItem;
+
     private ArrayList<MilkTea> listMilkTea;
     private Toolbar toolbar;
-    private View viewShowCart, viewStoreActivity;
+    private View viewShowCart, tvThanhToan;
     private Cart mCart;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +45,6 @@ public class StoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getBundle();
     }
-
 
     private void initCart() {
         mCart = new Cart();
@@ -61,10 +61,6 @@ public class StoreActivity extends AppCompatActivity {
             listMilkTea = store.getListMilkTea();
             showListMilkTea();
         }
-    }
-
-    private void removeBundle(){
-        getIntent().removeExtra("store");
     }
 
     private void showListMilkTea() {
@@ -96,11 +92,8 @@ public class StoreActivity extends AppCompatActivity {
                         mCart.setListMilkTeaInCart(listMilTeaInCart);
                         reloadCart();
                     }
-
                 });
-
             }
-
         });
 
     }
@@ -126,8 +119,7 @@ public class StoreActivity extends AppCompatActivity {
         tvSumPrice = findViewById(R.id.tv_sum_price_in_show_cart);
         tvSumItem = findViewById(R.id.tv_sum_item_milk_tea_in_cart);
         toolbar = findViewById(R.id.toolbar);
-        viewStoreActivity = findViewById(R.id.nestedscrollview);
-
+        tvThanhToan=findViewById(R.id.thanhtoan);
         viewShowCart = findViewById(R.id.linearlayout_show_cart);
         viewShowCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,18 +144,15 @@ public class StoreActivity extends AppCompatActivity {
                 });
             }
         });
-
-
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        removeBundle();
-        overridePendingTransition(R.anim.anim_slide_in_from_left, R.anim.anim_slide_out_to_right);
-    }
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
+        tvThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(StoreActivity.this,PayActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("cart", mCart);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 }

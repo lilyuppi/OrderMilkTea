@@ -48,10 +48,12 @@ public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHol
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         final Store store = listStore.get(i);
         int discount = store.getDiscount();
-        int set= store.getNumberOfOrders();
+        //int set= store.getNumberOfOrders();
+
         viewHolder.tenquan.setText(store.getName());
         Glide.with(context).load(store.getImgSrc()).into(viewHolder.anhquan);
-        viewHolder.soluong.setText(String.valueOf(set)+"+");
+        //viewHolder.diachi.setText(String.valueOf(set)+"+");
+        viewHolder.diachi.setText(store.getInformation().getAddress());
         viewHolder.sale.setText(String.valueOf(discount)+ "%");
         viewHolder.relativeLayout_suggest.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,14 +71,14 @@ public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHol
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView anhquan;
         TextView tenquan;
-        TextView soluong;
+        TextView diachi;
         TextView sale;
         RelativeLayout relativeLayout_suggest;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             anhquan=itemView.findViewById(R.id.imageviewsuggest);
             tenquan=itemView.findViewById(R.id.textviewsuggest);
-            soluong=itemView.findViewById(R.id.soluongdat);
+            diachi=itemView.findViewById(R.id.diachi);
             sale = itemView.findViewById(R.id.sale);
             relativeLayout_suggest = itemView.findViewById(R.id.relative_layout_suggest);
 
