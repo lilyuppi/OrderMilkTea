@@ -1,6 +1,7 @@
 package com.example.ordermilktea.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class Banner1Fragment extends Fragment {
             Glide.with(getContext()).load(src_banner).into(imv_banner);
 
         }
+
         return view;
     }
 
