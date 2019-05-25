@@ -28,11 +28,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements DataStoreCallBack {
 
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    View decorView;
-    SpinKitView spinKitView;
-    LinearLayout linearLayoutLoading;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private View decorView;
+    private SpinKitView spinKitView;
+    private LinearLayout linearLayoutLoading;
     DataFireBase dataFireBase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

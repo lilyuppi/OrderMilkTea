@@ -36,6 +36,7 @@ public class BottomSheetDialogShowCart extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.bottom_sheet_cart, container, false);
+        getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
         map(v);
         getBundle();
         initRecyclerView(v);

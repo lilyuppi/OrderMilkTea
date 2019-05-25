@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Model.MilkTea;
 import com.example.ordermilktea.Model.Store;
+import com.example.ordermilktea.OnSwipeTouchListener;
 import com.example.ordermilktea.R;
 
 import java.text.NumberFormat;
@@ -89,4 +91,5 @@ public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHold
     public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {
         this.onItemClickedListener = onItemClickedListener;
     }
+
 }
