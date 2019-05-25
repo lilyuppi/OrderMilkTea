@@ -33,64 +33,93 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/diachi"
-        android:elevation="2dp"
+        android:id="@+id/soluongdat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textviewsuggest"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/imageviewsuggest_card"
         android:maxLines="1"
-        android:text="Hải Phòng"
-        android:textColor="#AFA3A3"
+        android:text="200+"
+        android:textColor="#777474"
         android:textSize="15sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/ic_up"
-        android:layout_width="10dp"
-        android:layout_height="20dp"
-        android:layout_below="@+id/diachi"
-        android:layout_margin="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/imageviewsuggest_card"
-        android:background="@drawable/ic_up"
-        android:scaleType="fitXY" />
-
-    <TextView
-        android:id="@+id/sale"
+    <LinearLayout
+        android:id="@+id/linearlayout_discount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/diachi"
-        android:layout_marginLeft="15dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/soluongdat"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_toRightOf="@id/imageviewsuggest_card"
+        android:background="@drawable/bg_sub_item"
         android:maxLines="1"
-        android:text="30%"
-        android:textColor="#EE3333"
-        android:textSize="13sp"
-        android:textStyle="bold" />
-
-    <ImageView
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:src="@drawable/ic_up"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:id="@+id/sale"
+            android:text="@string/airpay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/airPay"
-        android:layout_width="80dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@id/diachi"
-        android:layout_marginLeft="50dp"
+        android:layout_below="@id/soluongdat"
         android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/linearlayout_discount"
         android:layout_toRightOf="@id/imageviewsuggest_card"
-        android:background="@drawable/airpay"
-        android:maxLines="1" />
+        android:background="@drawable/bg_sub_item"
+        android:maxLines="1"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageView
 
-    <ImageView
+            android:src="@drawable/airpay"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:paddingLeft="5dp"
+            android:text="@string/airpay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/freeShip"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_below="@id/diachi"
-        android:layout_marginLeft="140dp"
+        android:layout_below="@id/soluongdat"
+        android:layout_toEndOf="@+id/airPay"
+        android:layout_marginLeft="5dp"
         android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_toRightOf="@id/imageviewsuggest_card"
-        android:background="@drawable/freeship"
-        android:maxLines="1" />
+        android:background="@drawable/bg_sub_item"
+        android:maxLines="1"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageView
+            android:src="@drawable/ic_motor"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <TextView
+            android:paddingLeft="5dp"
+            android:text="@string/freeship"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
 </RelativeLayout>

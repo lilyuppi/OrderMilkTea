@@ -29,8 +29,8 @@ import com.example.ordermilktea.R;
 import java.util.ArrayList;
 
 public class TrangChuFragment extends Fragment {
-
-    View view;
+    private AutoCompleteTextView autoCompleteTextSearch;
+    View view, viewMain;
     ArrayList<Store> listStore;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,@Nullable ViewGroup container,

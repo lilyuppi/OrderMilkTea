@@ -30,7 +30,6 @@ import java.util.Locale;
 public class StoreActivity extends AppCompatActivity {
     private ImageView imvBackDrop;
     private TextView tvTest, tvSumPrice, tvSumItem;
-
     private ArrayList<MilkTea> listMilkTea;
     private Toolbar toolbar;
     private View viewShowCart, tvThanhToan;
