@@ -5,29 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.SuccessActivity">
-    <TextView
-        android:layout_marginLeft="80dp"
-        android:textColor="#0E0C0C"
-        android:textStyle="bold"
-        android:layout_marginTop="200dp"
-        android:layout_gravity="center"
-        android:text="Chúc mừng bạn đặt hàng thành công"
-        android:id="@+id/successtext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:id="@+id/blacksuccess"
-        android:layout_marginLeft="180dp"
-        android:layout_below="@id/successtext"
-        android:src="@drawable/success1"
-        android:layout_width="30dp"
-        android:layout_height="40dp"/>
-    <ImageView
-        android:id="@+id/greensuccess"
-        android:visibility="gone"
-        android:layout_marginLeft="180dp"
-        android:layout_below="@id/successtext"
-        android:src="@drawable/success"
-        android:layout_width="30dp"
-        android:layout_height="40dp"/>
+        <TextView
+            android:layout_marginLeft="80dp"
+            android:textColor="#0E0C0C"
+            android:textStyle="bold"
+            android:layout_marginTop="200dp"
+            android:layout_gravity="center"
+            android:text="Chúc mừng bạn đặt hàng thành công"
+            android:id="@+id/successtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/blacksuccess"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="180dp"
+            android:layout_below="@id/successtext"
+            android:src="@drawable/success1"
+            android:layout_width="30dp"
+            android:layout_height="40dp"/>
+        <ImageView
+            android:id="@+id/greensuccess"
+            android:visibility="gone"
+            android:layout_marginLeft="180dp"
+            android:layout_marginRight="180dp"
+            android:layout_below="@id/successtext"
+            android:src="@drawable/success"
+            android:layout_width="30dp"
+            android:layout_height="40dp"/>
 </RelativeLayout>
