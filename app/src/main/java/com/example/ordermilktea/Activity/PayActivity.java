@@ -21,9 +21,12 @@ import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Adapter.PayAdapter;
 import com.example.ordermilktea.Adapter.SuggestAdapter;
 import com.example.ordermilktea.Dialog.BottomSheetDialogShowCart;
+import com.example.ordermilktea.Firebase.DataFireBase;
+import com.example.ordermilktea.Firebase.DataStoreCallBack;
 import com.example.ordermilktea.Fragment.BlankFragment;
 import com.example.ordermilktea.Fragment.TrangChuFragment;
 import com.example.ordermilktea.Model.Cart;
+import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
 import com.example.ordermilktea.R;
@@ -31,21 +34,24 @@ import com.example.ordermilktea.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PayActivity extends AppCompatActivity {
+public class PayActivity extends AppCompatActivity implements DataStoreCallBack {
     ArrayList<MilkTeaInCart> list;
     private Dialog dialog;
-    PayAdapter payAdapter;
-    RecyclerView recyclerView;
-    ImageView imgpay;
-    Button btnbook,btnyes,btnno;
-    int ship = 15000;
-    TextView soluongsp,tensp,sugar,money,tongsoluong,tongtien,sum;
-    Toolbar toolbar;
-    BottomSheetDialogShowCart bottomSheetDialogShowCart;
+    private PayAdapter payAdapter;
+    private RecyclerView recyclerView;
+    private ImageView imgpay;
+    private Button btnbook,btnyes,btnno;
+    private int ship = 15000;
+    private TextView soluongsp,tensp,sugar,money,tongsoluong,tongtien,sum;
+    private Toolbar toolbar;
+    private Information informationStore;
+    private Cart cart;
+    private DataFireBase dataFireBase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
+        dataFireBase = new DataFireBase( this);
         map();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -56,8 +62,8 @@ public class PayActivity extends AppCompatActivity {
     private void getData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            final Cart cart;
             cart = (Cart) bundle.getSerializable("cart");
+            informationStore = (Information) bundle.getSerializable("information");
             list = new ArrayList<>();
             list= cart.getListMilkTeaInCart();
             int numberofOrders = 0;
@@ -74,15 +80,7 @@ public class PayActivity extends AppCompatActivity {
                     sum.setText(cart.getSumPrice()+"");
                 }
             });
-            btnbook.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    showDialog();
-//                    showAlertDialog();
-                    Intent intent=new Intent(PayActivity.this,MapsActivity.class);
-                    startActivity(intent);
-                }
-            });
+
         }
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,  LinearLayoutManager.VERTICAL,false);
@@ -91,6 +89,10 @@ public class PayActivity extends AppCompatActivity {
         payAdapter = new PayAdapter(list,getApplicationContext());
         recyclerView.setAdapter(payAdapter);
 
+    }
+
+    private void addCartToFireBase(){
+        dataFireBase.setNewCart(informationStore, cart);
     }
 
     private void map() {
@@ -107,49 +109,25 @@ public class PayActivity extends AppCompatActivity {
         btnbook=findViewById(R.id.buttonbook);
         btnyes=findViewById(R.id.button_yes);
         btnno=findViewById(R.id.button_no);
-
-    }
-//    public void showDialog() {
-//        dialog = new Dialog(PayActivity.this);
-////        dialog.setTitle("Thangcode.com");
-//        dialog.setContentView(R.layout.dialog);
-//        dialog.show();
-//        btnyes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent=new Intent(PayActivity.this, BlankFragment.class);
-//                startActivity(intent);
-//
-//            }
-//        });
-//    }
-public void showAlertDialog(){
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//    builder.setTitle("ThangCoder.Com");
-    builder.setMessage("Xác nhận đặt hàng");
-    builder.setCancelable(false);
-    builder.setPositiveButton("HỦY", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-            Toast.makeText(PayActivity.this, "Không thoát được", Toast.LENGTH_SHORT).show();
-
-        }
-    });
-    builder.setNegativeButton("ĐỒNG Ý", new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface dialogInterface, int i) {
-//            dialogInterface.dismiss();
-            Intent intent=new Intent(PayActivity.this, BlankFragment.class);
+        btnbook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addCartToFireBase();
+                Intent intent=new Intent(PayActivity.this,SuccessActivity.class);
                 startActivity(intent);
-        }
-    });
-    AlertDialog alertDialog = builder.create();
-    alertDialog.show();
+            }
+        });
+    }
 
-}
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+
+    @Override
+    public void onReceiveListStore(ArrayList<Store> listStore) {
+
     }
 }
