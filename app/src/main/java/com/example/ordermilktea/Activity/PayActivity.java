@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -39,19 +40,20 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
     private Dialog dialog;
     private PayAdapter payAdapter;
     private RecyclerView recyclerView;
-    private ImageView imgpay;
-    private Button btnbook,btnyes,btnno;
+    private ImageView imgpay, imvBackDrop;
+    private Button btnbook, btnyes, btnno;
     private int ship = 15000;
-    private TextView soluongsp,tensp,sugar,money,tongsoluong,tongtien,sum;
+    private TextView soluongsp, tensp, sugar, money, tongsoluong, tongtien, sum;
     private Toolbar toolbar;
     private Information informationStore;
     private Cart cart;
     private DataFireBase dataFireBase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
-        dataFireBase = new DataFireBase( this);
+        dataFireBase = new DataFireBase(this);
         map();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,55 +67,63 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
             cart = (Cart) bundle.getSerializable("cart");
             informationStore = (Information) bundle.getSerializable("information");
             list = new ArrayList<>();
-            list= cart.getListMilkTeaInCart();
+            list = cart.getListMilkTeaInCart();
             int numberofOrders = 0;
-            for (int i = 0;i<list.size();i++){
-                numberofOrders+=list.get(i).getNumberOfOrders();
+            for (int i = 0; i < list.size(); i++) {
+                numberofOrders += list.get(i).getNumberOfOrders();
             }
-            tongsoluong.setText(numberofOrders+"");
-            tongtien.setText(cart.getSumPrice()+"");
-            sum.setText(cart.getSumPrice()+ship+"");
+            tongsoluong.setText(numberofOrders + "");
+            tongtien.setText(cart.getSumPrice() + "");
+            sum.setText(cart.getSumPrice() + ship + "");
 
             imgpay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    sum.setText(cart.getSumPrice()+"");
+                    sum.setText(cart.getSumPrice() + "");
                 }
             });
 
         }
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,  LinearLayoutManager.VERTICAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        payAdapter = new PayAdapter(list,getApplicationContext());
+        payAdapter = new PayAdapter(list, getApplicationContext());
         recyclerView.setAdapter(payAdapter);
 
     }
 
-    private void addCartToFireBase(){
+    private void addCartToFireBase() {
         dataFireBase.setNewCart(informationStore, cart);
     }
 
     private void map() {
-        soluongsp=findViewById(R.id.so_luong_san_pham);
-        tensp=findViewById(R.id.ten_san_pham);
-        sugar=findViewById(R.id.sugar_ice_topping);
-        money=findViewById(R.id.money);
-        tongsoluong=findViewById(R.id.tong_so_luong);
-        tongtien=findViewById(R.id.tong_tien_tra);
-        sum=findViewById(R.id.sum_tien);
-        toolbar=findViewById(R.id.toolbar);
-        recyclerView=findViewById(R.id.recyclerviewPay);
-        imgpay=findViewById(R.id.airpay);
-        btnbook=findViewById(R.id.buttonbook);
-        btnyes=findViewById(R.id.button_yes);
-        btnno=findViewById(R.id.button_no);
+        soluongsp = findViewById(R.id.so_luong_san_pham);
+        tensp = findViewById(R.id.ten_san_pham);
+        sugar = findViewById(R.id.sugar_ice_topping);
+        money = findViewById(R.id.money);
+        tongsoluong = findViewById(R.id.tong_so_luong);
+        tongtien = findViewById(R.id.tong_tien_tra);
+        sum = findViewById(R.id.sum_tien);
+        toolbar = findViewById(R.id.toolbar);
+        recyclerView = findViewById(R.id.recyclerviewPay);
+        imgpay = findViewById(R.id.airpay);
+        btnbook = findViewById(R.id.buttonbook);
+        btnyes = findViewById(R.id.button_yes);
+        btnno = findViewById(R.id.button_no);
+        imvBackDrop = findViewById(R.id.imv_backdrop_pay);
+        imvBackDrop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PayActivity.this, MapsActivity.class);
+                startActivityForResult(intent, 111);
+            }
+        });
         btnbook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addCartToFireBase();
-                Intent intent=new Intent(PayActivity.this,SuccessActivity.class);
+                Intent intent = new Intent(PayActivity.this, SuccessActivity.class);
                 startActivity(intent);
             }
         });
@@ -129,5 +139,10 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
     @Override
     public void onReceiveListStore(ArrayList<Store> listStore) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

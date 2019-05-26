@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,6 +50,7 @@ public class MapsActivity extends FragmentActivity implements
     private Location lastlocation;
     private Marker currentUserLocationMarker;
     private static final int Request_User_Location_Code = 99;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,26 +67,22 @@ public class MapsActivity extends FragmentActivity implements
     }
 
 
-    public void onClick(View v){
-        switch (v.getId())
-        {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.search_address:
-                EditText addressField =(EditText) findViewById(R.id.location_search);
+                EditText addressField = (EditText) findViewById(R.id.location_search);
                 String address = addressField.getText().toString();
 
                 List<Address> addressList = null;
                 MarkerOptions usermarkerOptions = new MarkerOptions();
-                if (!TextUtils.isEmpty(address))
-                {
+                if (!TextUtils.isEmpty(address)) {
                     Geocoder geocoder = new Geocoder(this);
 
                     try {
                         addressList = geocoder.getFromLocationName(address, 6);
 
-                        if (addressList != null)
-                        {
-                            for (int i = 0; i < addressList.size(); i++)
-                            {
+                        if (addressList != null) {
+                            for (int i = 0; i < addressList.size(); i++) {
                                 Address userAddress = addressList.get(i);
                                 LatLng latLng = new LatLng(userAddress.getLatitude(), userAddress.getLongitude());
 
@@ -96,19 +94,13 @@ public class MapsActivity extends FragmentActivity implements
                                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                 mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
                             }
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(this, "Location not found", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    catch (IOException e)
-                    {
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
-                else
-                {
+                } else {
                     Toast.makeText(this, "please write any location", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -123,6 +115,49 @@ public class MapsActivity extends FragmentActivity implements
             buildGoogleMapClient();
 
             mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setMyLocationButtonEnabled(true);
+            /*mMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+                @Override
+                public boolean onMyLocationButtonClick() {
+                    Log.d("mymap", "123" );
+                    String address = "Nhà G2 144 xuân thủy";
+                    List<Address> addressList = null;
+                    MarkerOptions usermarkerOptions = new MarkerOptions();
+
+                    Geocoder geocoder = new Geocoder(MapsActivity.this);
+
+                    try {
+                        addressList = geocoder.getFromLocationName(address, 6);
+
+                        if (addressList != null) {
+                            for (int i = 0; i < addressList.size(); i++) {
+                                Address userAddress = addressList.get(i);
+                                LatLng latLng = new LatLng(userAddress.getLatitude(), userAddress.getLongitude());
+
+                                usermarkerOptions.position(latLng);
+                                usermarkerOptions.title(address);
+                                usermarkerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                                mMap.clear();
+                                mMap.addMarker(usermarkerOptions);
+                                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+                            }
+                        } else {
+                            Log.d("error", "error");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    return false;
+                }
+            });*/
+            mMap.setOnMyLocationClickListener(new GoogleMap.OnMyLocationClickListener() {
+                @Override
+                public void onMyLocationClick(@NonNull Location location) {
+                    Log.d("mymap", "map");
+                }
+            });
         }
 
     }
@@ -197,8 +232,8 @@ public class MapsActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onRequestPermissionsResult ( int requestCode, @NonNull String[] permissions,
-                                             @NonNull int[] grantResults){
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         switch (requestCode) {
             case Request_User_Location_Code:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

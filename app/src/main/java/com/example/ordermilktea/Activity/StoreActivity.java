@@ -18,6 +18,7 @@ import com.example.ordermilktea.Adapter.MilkTeaAdapter;
 import com.example.ordermilktea.Dialog.BottomSheetDialogAddToCart;
 import com.example.ordermilktea.Dialog.BottomSheetDialogShowCart;
 import com.example.ordermilktea.Model.Cart;
+import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTea;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
@@ -34,6 +35,7 @@ public class StoreActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private View viewShowCart, tvThanhToan;
     private Cart mCart;
+    private Store mStore;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +55,12 @@ public class StoreActivity extends AppCompatActivity {
     private void getBundle() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Store store = (Store) bundle.getSerializable("store");
-            getSupportActionBar().setTitle(store.getName());
-            toolbar.setSubtitle(store.getInformation().getAddress());
-            tvTest.setText(store.getName());
-            Glide.with(this).load(store.getImgSrc()).into(imvBackDrop);
-            listMilkTea = store.getListMilkTea();
+            mStore = (Store) bundle.getSerializable("store");
+            getSupportActionBar().setTitle(mStore.getName());
+            toolbar.setSubtitle(mStore.getInformation().getAddress());
+            tvTest.setText(mStore.getName());
+            Glide.with(this).load(mStore.getImgSrc()).into(imvBackDrop);
+            listMilkTea = mStore.getListMilkTea();
             showListMilkTea();
         }
     }
@@ -157,6 +159,7 @@ public class StoreActivity extends AppCompatActivity {
                 Intent intent=new Intent(StoreActivity.this,PayActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("cart", mCart);
+                bundle.putSerializable("information", mStore.getInformation());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

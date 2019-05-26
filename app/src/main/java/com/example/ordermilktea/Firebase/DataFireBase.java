@@ -3,10 +3,13 @@ package com.example.ordermilktea.Firebase;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.example.ordermilktea.Model.Cart;
 import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTea;
+import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
 import com.example.ordermilktea.SharedPreferences.InformationLogin;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 public class DataFireBase {
@@ -31,8 +38,10 @@ public class DataFireBase {
     final private String LIST_STORE = "list_store";
     final private String LIST_MILK_TEA = "list_milk_tea";
     final private String LIST_USER = "list_user";
+    final private String HISTORY = "history";
     final private String UID = "uid";
     final private String NAME = "name";
+    final private String CART = "cart";
     final private String DESCRIBE = "describe";
     final private String INFO = "information";
     final private String IMG = "img_src";
@@ -41,7 +50,9 @@ public class DataFireBase {
     final private String PHONE = "phone_number";
     final private String FREESHIP = "freeship";
     final private String AIRPAY = "airpay";
+    final private String TIMEORDER = "timeorder";
     final private String DISCOUNT = "discount";
+    final private String TOPPING = "topping";
     final private String NUMBER_OF_ORDERS = "number_of_orders";
     public DataFireBase(DataStoreCallBack dataStoreCallBack) {
         init();
@@ -149,10 +160,46 @@ public class DataFireBase {
         }
     }
 
-    private void setNewUser(String uid) {
+    public void setNewUser(String uid) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String name = user.getDisplayName();
         refListUser.child(uid).child(NAME).setValue(name);
+    }
+
+    public void setNewCart(Information information, Cart cart) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        Date currentTime = Calendar.getInstance().getTime();
+        String idCart = currentTime.getYear() + "" + currentTime.getMonth()+ "" + currentTime.getDay() + "" + currentTime.getHours() + "" + currentTime.getMinutes()
+                + "" + currentTime.getSeconds() + "" + uid;
+        Log.d("idCart", idCart);
+
+        String pathHistory = "/" + LIST_USER + "/" + uid + "/" + HISTORY + "/" + idCart;
+        DatabaseReference refHistory = database.getReference(pathHistory);
+        Log.d("uid", uid + "");
+        // set time
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss - MM/dd/yyyy");
+        String timeOrder = dateFormat.format(calendar.getTime());
+
+        refHistory.child(TIMEORDER).setValue(timeOrder);
+        // set information store
+        refHistory.child(INFO).child(ADDRESS).setValue(information.getAddress());
+        refHistory.child(INFO).child(PHONE).setValue(information.getPhoneNumber());
+        // set cart
+        for (MilkTeaInCart milkTeaInCart : cart.getListMilkTeaInCart()) {
+            String nameMilkTea = milkTeaInCart.getName();
+            refHistory.child(CART).child(nameMilkTea).child(NAME).setValue(milkTeaInCart.getName());
+            String listTopping = "";
+            for (String topping : milkTeaInCart.getTopping()) {
+                listTopping += ", ";
+                listTopping += topping;
+            }
+            listTopping = "[" + milkTeaInCart.getIce() + ", " + milkTeaInCart.getSugar() + listTopping + "]";
+            refHistory.child(CART).child(nameMilkTea).child(TOPPING).setValue(listTopping);
+            refHistory.child(CART).child(nameMilkTea).child(PRICE).setValue(milkTeaInCart.getPrice());
+            refHistory.child(CART).child(nameMilkTea).child(NUMBER_OF_ORDERS).setValue(milkTeaInCart.getNumberOfOrders());
+        }
     }
 
     private void randomListMilkTea(String nameStore, int number) {

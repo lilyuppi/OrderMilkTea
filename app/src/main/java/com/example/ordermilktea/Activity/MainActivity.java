@@ -108,6 +108,5 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
         } catch (NoSuchAlgorithmException e) {
 
         }
-
     }
 }
