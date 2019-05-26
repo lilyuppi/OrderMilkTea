@@ -1,10 +1,15 @@
 package com.example.ordermilktea.Activity;
 
 import android.app.ActionBar;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -24,6 +29,8 @@ import com.github.ybq.android.spinkit.SpriteFactory;
 import com.github.ybq.android.spinkit.Style;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements DataStoreCallBack {
@@ -41,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
         map();
         initLoading();
         dataFireBase = new DataFireBase(this);
+        printhashkey();
     }
 
     private void initLoading() {
@@ -83,5 +91,23 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
         tabLayout.getTabAt(1).setIcon(R.drawable.baseline_assignment_black_18dp);
         tabLayout.getTabAt(2).setIcon(R.drawable.baseline_favorite_black_18dp);
         tabLayout.getTabAt(3).setIcon(R.drawable.baseline_person_black_18dp);
+    }
+    public void printhashkey(){
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.example.ordermilktea",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
+
     }
 }
