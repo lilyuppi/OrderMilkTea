@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +49,9 @@ public class CaNhanFragment extends Fragment {
     private boolean mIsLogined;
     private InformationLogin informationLogin;
 
+    private ListView listView;
+    ArrayAdapter<String> adapter;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -58,6 +65,48 @@ public class CaNhanFragment extends Fragment {
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
                 new AuthUI.IdpConfig.FacebookBuilder().build()
         );
+
+
+        View view = inflater.inflate(R.layout.fragment_ca_nhan, container, false);
+        listView = (ListView)getActivity().findViewById(R.id.lv_listview);
+        final String[] cacthoi = new String[]{"Hiện tại đơn",
+                                                "Hiện tại tiếp diễn",
+                                                "Hiện tại hoàn thành" };
+
+        ListView listView = (ListView) view.findViewById(R.id.lv_listview);
+
+        ArrayAdapter<String> listviewAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_list_item_1,
+                cacthoi);
+        listView.setAdapter(listviewAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                if(position == 0){
+//                    Hientaidon hientaidon = new Hientaidon();
+//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_nguphap, hientaidon);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
+//                }
+//                if(position == 1){
+//                    Hientaitiepdien hientaitiepdien = new Hientaitiepdien();
+//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_nguphap, hientaitiepdien);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
+//                }
+//                if(position == 2){
+//                    Hientaihoanthanh hientaihoanthanh = new Hientaihoanthanh();
+//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragment_nguphap, hientaihoanthanh);
+//                    fragmentTransaction.addToBackStack(null);
+//                    fragmentTransaction.commit();
+//                }
+            }
+        });
+
 
         return view;
     }
