@@ -67,6 +67,7 @@ public class SuggestFragment extends Fragment {
                 bundle.putSerializable("store", store);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.anim_slide_in_from_right, R.anim.anim_slide_out_to_left);
             }
         });
         return view;

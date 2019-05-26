@@ -78,7 +78,7 @@ public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHol
             super(itemView);
             anhquan=itemView.findViewById(R.id.imageviewsuggest);
             tenquan=itemView.findViewById(R.id.textviewsuggest);
-            diachi=itemView.findViewById(R.id.diachi);
+            diachi=itemView.findViewById(R.id.soluongdat);
             sale = itemView.findViewById(R.id.sale);
             relativeLayout_suggest = itemView.findViewById(R.id.relative_layout_suggest);
 

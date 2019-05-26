@@ -79,8 +79,9 @@ public class PayActivity extends AppCompatActivity {
                 public void onClick(View view) {
 //                    showDialog();
 //                    showAlertDialog();
-                    Intent intent=new Intent(PayActivity.this,MapsActivity.class);
+                    Intent intent=new Intent(PayActivity.this,SuccessActivity.class);
                     startActivity(intent);
+
                 }
             });
         }

@@ -30,7 +30,6 @@ import java.util.Locale;
 public class StoreActivity extends AppCompatActivity {
     private ImageView imvBackDrop;
     private TextView tvTest, tvSumPrice, tvSumItem;
-
     private ArrayList<MilkTea> listMilkTea;
     private Toolbar toolbar;
     private View viewShowCart, tvThanhToan;
@@ -45,6 +44,7 @@ public class StoreActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getBundle();
     }
+
 
     private void initCart() {
         mCart = new Cart();
@@ -61,6 +61,10 @@ public class StoreActivity extends AppCompatActivity {
             listMilkTea = store.getListMilkTea();
             showListMilkTea();
         }
+    }
+
+    private void removeBundle(){
+        getIntent().removeExtra("store");
     }
 
     private void showListMilkTea() {
@@ -92,8 +96,11 @@ public class StoreActivity extends AppCompatActivity {
                         mCart.setListMilkTeaInCart(listMilTeaInCart);
                         reloadCart();
                     }
+
                 });
+
             }
+
         });
 
     }
@@ -154,5 +161,17 @@ public class StoreActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        removeBundle();
+        overridePendingTransition(R.anim.anim_slide_in_from_left, R.anim.anim_slide_out_to_right);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
