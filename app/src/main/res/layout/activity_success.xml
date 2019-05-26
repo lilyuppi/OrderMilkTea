@@ -6,8 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".Activity.SuccessActivity">
         <TextView
-            android:layout_marginLeft="80dp"
+            android:layout_marginLeft="60dp"
             android:textColor="#0E0C0C"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_marginTop="200dp"
             android:layout_gravity="center"
@@ -19,17 +20,19 @@
             android:id="@+id/blacksuccess"
             android:layout_marginLeft="180dp"
             android:layout_marginRight="180dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/successtext"
             android:src="@drawable/success1"
-            android:layout_width="30dp"
-            android:layout_height="40dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
         <ImageView
             android:id="@+id/greensuccess"
             android:visibility="gone"
             android:layout_marginLeft="180dp"
             android:layout_marginRight="180dp"
+            android:layout_marginTop="10dp"
             android:layout_below="@id/successtext"
             android:src="@drawable/success"
-            android:layout_width="30dp"
-            android:layout_height="40dp"/>
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
 </RelativeLayout>

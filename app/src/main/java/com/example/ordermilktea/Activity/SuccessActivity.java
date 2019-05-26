@@ -47,7 +47,7 @@ public class SuccessActivity extends AppCompatActivity {
         Thread chuyen = new Thread() { // hàm chạy gif sau 5s tự chuyển sang màn hình chính
             public void run() {
                 try {
-                    sleep(3000);
+                    sleep(4000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {

@@ -156,19 +156,33 @@
                     android:orientation="horizontal"
                     android:gravity="center_horizontal"
                     android:padding="5dp">
-                    <ImageView
+                    <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:id="@+id/airpay"
+                        android:elevation="2dp"
+                        android:layout_margin="2dp">
+                        <ImageView
                         android:layout_width="140dp"
                         android:layout_height="70dp"
-                        android:elevation="2dp"
                         android:src="@drawable/air" />
-
-                    <ImageView
-                        android:id="@+id/directpay"
-                        android:layout_width="140dp"
-                        android:layout_height="70dp"
+                    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:elevation="2dp"
-                        android:src="@drawable/tienmat" />
+                        android:id="@+id/directpay"
+                        android:layout_margin="2dp">
+                        <TextView
+                            android:textSize="20sp"
+                            android:textColor="#1976D2"
+                            android:gravity="center"
+                            android:text="Tiền mặt"
+                            android:layout_width="140dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/tienmat" />
+                    </android.support.v7.widget.CardView>
+
                 </LinearLayout>
                 <Button
                     android:id="@+id/buttonbook"
