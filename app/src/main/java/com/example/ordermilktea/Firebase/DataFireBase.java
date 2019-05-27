@@ -145,6 +145,8 @@ public class DataFireBase {
                         String uid = user.getKey();
                         if (uid.equals(uidLocal)) {
                             isExisted = true;
+                            int phone = (int) user.child(PHONE).getValue();
+                            informationLogin.setPhone(phone);
                         }
                     }
                     if (!isExisted) {
@@ -202,7 +204,8 @@ public class DataFireBase {
         }
     }
 
-    private void updatePhone(int phone) {
+
+    public void updatePhone(int phone) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         refListUser.child(uid).child(PHONE).setValue(phone);

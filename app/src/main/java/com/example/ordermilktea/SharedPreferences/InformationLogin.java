@@ -20,6 +20,21 @@ public class InformationLogin {
         editor.commit();
     }
 
+    public void setPhone(int phone) {
+        SharedPreferences sharedPreferences = this.activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("phone", phone);
+        editor.apply();
+        editor.commit();
+    }
+
+    public int getPhone(){
+
+        SharedPreferences sharedPreferences = this.activity.getPreferences(Context.MODE_PRIVATE);
+        int phone = sharedPreferences.getInt("phone", 0);
+        return phone;
+    }
+
     public boolean getIsLogined() {
         SharedPreferences sharedPreferences = this.activity.getPreferences(Context.MODE_PRIVATE);
         boolean is = sharedPreferences.getBoolean("logined", false);

@@ -129,6 +129,7 @@ public class CaNhanFragment extends Fragment {
         // get user
         mIsLogined = true;
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         tvName.setText(user.getDisplayName() + "");
         String facebookUserId = "";
 
