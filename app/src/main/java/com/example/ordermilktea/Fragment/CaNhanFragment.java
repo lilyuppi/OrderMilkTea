@@ -5,10 +5,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,11 +47,16 @@ public class CaNhanFragment extends Fragment {
     List<AuthUI.IdpConfig> providers;
     private CircleImageView imvAvatar;
     private View view, viewLogin;
-    private Button btnLogout;
-    private TextView tvName;
+    private Button btnLogout, btnEditPhone;
+    private EditText etPhone;
+    private TextView tvName, tvPhone;
     private boolean mIsLogined;
+    private String mPhone;
     private InformationLogin informationLogin;
-
+    private FirebaseUser user;
+    private boolean isEditPhone;
+    private ListView listView;
+    ArrayAdapter<String> adapter;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -58,6 +70,36 @@ public class CaNhanFragment extends Fragment {
                 new AuthUI.IdpConfig.GoogleBuilder().build(),
                 new AuthUI.IdpConfig.FacebookBuilder().build()
         );
+
+
+        listView = (ListView)getActivity().findViewById(R.id.lv_listview);
+        final String[] trangCaNhan = new String[]{"Lịch sử",
+                                                  "Mã khuyến mại của tôi",
+                                                  "Địa chỉ",
+                                                  "About team" };
+
+        ListView listView = (ListView) view.findViewById(R.id.lv_listview);
+
+        ArrayAdapter<String> listviewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, trangCaNhan);
+        listView.setAdapter(listviewAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 0){
+                    ViewPager viewPager = getActivity().findViewById(R.id.myViewPager);
+                    viewPager.setCurrentItem(1);
+                }
+                if(position == 3){
+                    AboutTeamFragment aboutTeam = new AboutTeamFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_canhan, aboutTeam);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            }
+        });
+
 
         return view;
     }
@@ -74,8 +116,28 @@ public class CaNhanFragment extends Fragment {
     private void map(View view) {
         mIsLogined = false;
         btnLogout = view.findViewById(R.id.btn_logout);
+        btnEditPhone = view.findViewById(R.id.btn_edit_phone);
+        btnEditPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isEditPhone) {
+                    etPhone.setVisibility(View.VISIBLE);
+                    tvPhone.setVisibility(View.GONE);
+                    btnEditPhone.setText("Hoàn tất");
+                }else {
+                    etPhone.setVisibility(View.GONE);
+                    tvPhone.setVisibility(View.VISIBLE);
+                    btnEditPhone.setText("Sửa");
+                    informationLogin.setPhone("" + etPhone.getText());
+                    tvPhone.setText(etPhone.getText());
+                }
+                isEditPhone = !isEditPhone;
+            }
+        });
         imvAvatar = view.findViewById(R.id.imv_avatar);
         tvName = view.findViewById(R.id.tv_name_person);
+        tvPhone = view.findViewById(R.id.tv_phone_about_me);
+        etPhone = view.findViewById(R.id.et_phone_about_me);
         viewLogin = view.findViewById(R.id.linearlayout_login);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +152,11 @@ public class CaNhanFragment extends Fragment {
                                 imvAvatar.setImageResource(R.drawable.ic_account);
                                 tvName.setText("Đăng nhập");
                                 mIsLogined = false;
-                                informationLogin.setSharedPre(mIsLogined, "");
+                                etPhone.setVisibility(View.GONE);
+                                btnEditPhone.setVisibility(View.GONE);
+                                btnEditPhone.setText("Sửa");
+                                tvPhone.setVisibility(View.GONE);
+                                informationLogin.setSharedPre(mIsLogined, "", "");
 //                                showSignInOptions();
                             }
                         })
@@ -126,10 +192,21 @@ public class CaNhanFragment extends Fragment {
     }
 
     private void updateAfterLogin() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
         // get user
         mIsLogined = true;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        informationLogin.getPhoneNumberFromFireBase();
+        informationLogin.setOnReceived(new InformationLogin.OnReceived() {
+            @Override
+            public void onReceivecPhone(String phone) {
+                mPhone = phone;
+                informationLogin.setSharedPre(mIsLogined, user.getUid(), mPhone);
+            }
+        });
+
         tvName.setText(user.getDisplayName() + "");
+        etPhone.setText(informationLogin.getPhone() + "");
+        tvPhone.setText(informationLogin.getPhone() + "");
         String facebookUserId = "";
 
         // find the Facebook profile and get the user's id
@@ -148,18 +225,26 @@ public class CaNhanFragment extends Fragment {
         }
         // (optional) use Picasso to download and show to image
         Glide.with(getActivity().getApplicationContext()).load(photoUrl).into(imvAvatar);
+
+        tvPhone.setVisibility(View.VISIBLE);
+        btnEditPhone.setVisibility(View.VISIBLE);
         btnLogout.setVisibility(View.VISIBLE);
         viewLogin.setEnabled(false);
-        informationLogin.setSharedPre(mIsLogined, user.getUid());
+        informationLogin.setSharedPre(mIsLogined, user.getUid(), mPhone);
     }
+
+
 
 
     @Override
     public void onResume() {
         super.onResume();
+        etPhone.setVisibility(View.GONE);
+        isEditPhone = false;
         mIsLogined = informationLogin.getIsLogined();
         if (mIsLogined) {
 //            btnLogout.setVisibility(View.VISIBLE);
+            btnEditPhone.setText("Sửa");
             updateAfterLogin();
         }
     }

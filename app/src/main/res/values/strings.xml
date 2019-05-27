@@ -22,4 +22,8 @@
     <string name="ice_25">25% đá</string>
     <string name="ice_0">0% đá</string>
     <string name="title_activity_maps">Map</string>
+    <string name="tuan_anh">Trương Tuấn Anh</string>
+    <string name="thanh_nam">Nguyễn Thành Nam</string>
+    <string name="dang_ha">Hà Hải Đăng</string>
+    <string name="tien_dat">Vũ Tiến Đạt</string>
 </resources>

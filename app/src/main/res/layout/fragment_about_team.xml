@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="4"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.AboutTeamFragment"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <LinearLayout
+            android:background="#9C27B0"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/tuan_anh"
+                android:layout_width="120dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/tuan_anh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="16022302"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <LinearLayout
+            android:background="#9C27B0"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/thanh_nam"
+                android:layout_width="120dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/thanh_nam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textSize="18dp"
+                    android:textColor="#fff"
+                    android:layout_marginLeft="20dp"
+                    android:text="16020151"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <LinearLayout
+            android:background="#9C27B0"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/dang2"
+                android:layout_width="120dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/dang_ha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="16020114"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        >
+
+        <LinearLayout
+            android:background="#9C27B0"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:src="@drawable/dat_vu"
+                android:layout_width="120dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/tien_dat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:textColor="#fff"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="20dp"
+                    android:text="16022307"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

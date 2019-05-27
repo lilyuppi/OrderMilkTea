@@ -1,31 +1,21 @@
 package com.example.ordermilktea.Activity;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Adapter.PayAdapter;
-import com.example.ordermilktea.Adapter.SuggestAdapter;
-import com.example.ordermilktea.Dialog.BottomSheetDialogShowCart;
 import com.example.ordermilktea.Firebase.DataFireBase;
 import com.example.ordermilktea.Firebase.DataStoreCallBack;
-import com.example.ordermilktea.Fragment.BlankFragment;
-import com.example.ordermilktea.Fragment.TrangChuFragment;
 import com.example.ordermilktea.Model.Cart;
 import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTeaInCart;
@@ -33,7 +23,6 @@ import com.example.ordermilktea.Model.Store;
 import com.example.ordermilktea.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PayActivity extends AppCompatActivity implements DataStoreCallBack {
     ArrayList<MilkTeaInCart> list;

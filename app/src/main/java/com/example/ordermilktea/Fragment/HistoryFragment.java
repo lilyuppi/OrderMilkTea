@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.ordermilktea.R;
 
-public class BlankFragment extends Fragment {
+public class HistoryFragment extends Fragment {
     View view;
 
     @Override

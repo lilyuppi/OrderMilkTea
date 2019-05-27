@@ -1,6 +1,5 @@
 package com.example.ordermilktea.Activity;
 
-import android.app.ActionBar;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -11,14 +10,12 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.ordermilktea.Adapter.MainViewPagerAdapter;
 import com.example.ordermilktea.Firebase.DataFireBase;
 import com.example.ordermilktea.Firebase.DataStoreCallBack;
-import com.example.ordermilktea.Fragment.BlankFragment;
+import com.example.ordermilktea.Fragment.HistoryFragment;
 import com.example.ordermilktea.Fragment.CaNhanFragment;
 import com.example.ordermilktea.Fragment.LoveFragment;
 import com.example.ordermilktea.Fragment.TrangChuFragment;
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
         trangChuFragment.setArguments(bundle);
         loveFragment.setArguments(bundle);
         mainViewPagerAdapter.addFragment(trangChuFragment,"");
-        mainViewPagerAdapter.addFragment(new BlankFragment(),"");
+        mainViewPagerAdapter.addFragment(new HistoryFragment(),"");
         mainViewPagerAdapter.addFragment(loveFragment,"");
         mainViewPagerAdapter.addFragment(new CaNhanFragment(),"");
         viewPager.setAdapter(mainViewPagerAdapter);
