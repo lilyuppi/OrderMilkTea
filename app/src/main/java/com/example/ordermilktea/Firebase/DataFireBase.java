@@ -202,6 +202,12 @@ public class DataFireBase {
         }
     }
 
+    private void updatePhone(int phone) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        refListUser.child(uid).child(PHONE).setValue(phone);
+    }
+
     private void randomListMilkTea(String nameStore, int number) {
         String[] listName = {"Ô long dâu rừng", "Ô Long Đào Kem", "Lục Trà Đào", "Lục Trà Nhài", "Hồng Trà"};
         String web = "https://androidtimetable.000webhostapp.com/img/";
