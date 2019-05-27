@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 
 import com.example.ordermilktea.R;
 
-public class BlankFragment extends Fragment {
+public class HistoryFragment extends Fragment {
     View view;
 
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater,@Nullable ViewGroup container,
                              @Nullable  Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_blank, container, false);
+        view= inflater.inflate(R.layout.fragment_history, container, false);
         return view;
     }
 

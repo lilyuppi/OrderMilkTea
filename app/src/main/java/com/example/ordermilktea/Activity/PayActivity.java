@@ -21,7 +21,7 @@ import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Adapter.PayAdapter;
 import com.example.ordermilktea.Adapter.SuggestAdapter;
 import com.example.ordermilktea.Dialog.BottomSheetDialogShowCart;
-import com.example.ordermilktea.Fragment.BlankFragment;
+import com.example.ordermilktea.Fragment.HistoryFragment;
 import com.example.ordermilktea.Fragment.TrangChuFragment;
 import com.example.ordermilktea.Model.Cart;
 import com.example.ordermilktea.Model.MilkTeaInCart;
@@ -139,7 +139,7 @@ public void showAlertDialog(){
         @Override
         public void onClick(DialogInterface dialogInterface, int i) {
 //            dialogInterface.dismiss();
-            Intent intent=new Intent(PayActivity.this, BlankFragment.class);
+            Intent intent=new Intent(PayActivity.this, HistoryFragment.class);
                 startActivity(intent);
         }
     });

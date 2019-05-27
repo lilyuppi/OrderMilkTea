@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/fragment_canhan"
     android:weightSum="10"
     tools:context=".Fragment.CaNhanFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -37,13 +39,12 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 android:text="Đăng nhập" />
-
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
-                android:visibility="visible"
+                android:visibility="gone"
                 style="@style/FirebaseUI.TextInputEditText.PhoneField"
                 android:paddingLeft="10dp"
                 android:hint="Số điện thoại"
@@ -55,28 +56,24 @@
 
     <ListView
         android:id="@+id/lv_listview"
-        android:layout_width="wrap_content"
-        android:layout_weight="6"
+        android:layout_weight="7"
+        android:layout_width="match_parent"
         android:layout_height="0dp">
 
     </ListView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="bottom">
 
         <Button
             android:id="@+id/btn_logout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:text="Đăng xuất"
-            android:visibility="visible"
-            android:layout_gravity="bottom"/>
+            android:visibility="gone" />
     </LinearLayout>
-
-
 
 </LinearLayout>

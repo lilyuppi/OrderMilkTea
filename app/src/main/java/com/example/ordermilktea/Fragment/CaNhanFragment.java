@@ -67,36 +67,34 @@ public class CaNhanFragment extends Fragment {
         );
 
 
-        View view = inflater.inflate(R.layout.fragment_ca_nhan, container, false);
         listView = (ListView)getActivity().findViewById(R.id.lv_listview);
-        final String[] cacthoi = new String[]{"Hiện tại đơn",
-                                                "Hiện tại tiếp diễn",
-                                                "Hiện tại hoàn thành" };
+        final String[] trangCaNhan = new String[]{"Lịch sử",
+                                                  "Mã khuyến mại của tôi",
+                                                  "Địa chỉ",
+                                                  "About team" };
 
         ListView listView = (ListView) view.findViewById(R.id.lv_listview);
 
-        ArrayAdapter<String> listviewAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1,
-                cacthoi);
+        ArrayAdapter<String> listviewAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, trangCaNhan);
         listView.setAdapter(listviewAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                if(position == 0){
-//                    Hientaidon hientaidon = new Hientaidon();
-//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                    fragmentTransaction.replace(R.id.fragment_nguphap, hientaidon);
-//                    fragmentTransaction.addToBackStack(null);
-//                    fragmentTransaction.commit();
-//                }
-//                if(position == 1){
-//                    Hientaitiepdien hientaitiepdien = new Hientaitiepdien();
-//                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                    fragmentTransaction.replace(R.id.fragment_nguphap, hientaitiepdien);
-//                    fragmentTransaction.addToBackStack(null);
-//                    fragmentTransaction.commit();
-//                }
+                if(position == 0){
+                    HistoryFragment lichsu = new HistoryFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_canhan, lichsu);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+                if(position == 3){
+                    AboutTeamFragment aboutTeam = new AboutTeamFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_canhan, aboutTeam);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
 //                if(position == 2){
 //                    Hientaihoanthanh hientaihoanthanh = new Hientaihoanthanh();
 //                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
