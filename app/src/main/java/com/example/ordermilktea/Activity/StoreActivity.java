@@ -159,6 +159,8 @@ public class StoreActivity extends AppCompatActivity {
                 Intent intent=new Intent(StoreActivity.this,PayActivity.class);
                 Bundle bundle=new Bundle();
                 bundle.putSerializable("cart", mCart);
+                bundle.putString("img_store", mStore.getImgSrc());
+                bundle.putString("name_store", mStore.getName());
                 bundle.putSerializable("information", mStore.getInformation());
                 intent.putExtras(bundle);
                 startActivity(intent);

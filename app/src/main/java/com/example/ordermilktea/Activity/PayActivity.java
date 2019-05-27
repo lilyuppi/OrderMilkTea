@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.example.ordermilktea.Adapter.PayAdapter;
 import com.example.ordermilktea.Firebase.DataFireBase;
 import com.example.ordermilktea.Firebase.DataStoreCallBack;
 import com.example.ordermilktea.Model.Cart;
+import com.example.ordermilktea.Model.HistoryModel;
 import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
@@ -37,15 +39,17 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
     private Information informationStore;
     private Cart cart;
     private DataFireBase dataFireBase;
-
+    private String imgSrcStore;
+    private String nameStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
-        dataFireBase = new DataFireBase(this);
+        dataFireBase = new DataFireBase(this, this);
         map();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         getData();
         recyclerView.setHasFixedSize(true);
     }
@@ -53,6 +57,9 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
     private void getData() {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
+            nameStore = bundle.getString("name_store");
+            getSupportActionBar().setTitle(nameStore);
+            imgSrcStore = bundle.getString("img_store");
             cart = (Cart) bundle.getSerializable("cart");
             informationStore = (Information) bundle.getSerializable("information");
             list = new ArrayList<>();
@@ -83,7 +90,7 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
     }
 
     private void addCartToFireBase() {
-        dataFireBase.setNewCart(informationStore, cart);
+        dataFireBase.setNewCart(informationStore, cart, imgSrcStore, nameStore);
     }
 
     private void map() {
@@ -111,6 +118,7 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
         btnbook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.main.finish();
                 addCartToFireBase();
                 Intent intent = new Intent(PayActivity.this, SuccessActivity.class);
                 startActivity(intent);
@@ -129,6 +137,12 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
     public void onReceiveListStore(ArrayList<Store> listStore) {
 
     }
+
+    @Override
+    public void onReceiveHistory(ArrayList<HistoryModel> historyModelArrayList) {
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

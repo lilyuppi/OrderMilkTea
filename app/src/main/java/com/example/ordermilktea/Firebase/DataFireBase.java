@@ -7,10 +7,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.ordermilktea.Model.Cart;
+import com.example.ordermilktea.Model.HistoryModel;
 import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTea;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
+import com.example.ordermilktea.Model.User;
 import com.example.ordermilktea.SharedPreferences.InformationLogin;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class DataFireBase {
@@ -40,6 +43,7 @@ public class DataFireBase {
     final private String LIST_USER = "list_user";
     final private String HISTORY = "history";
     final private String UID = "uid";
+    final private String USER = "user";
     final private String NAME = "name";
     final private String CART = "cart";
     final private String DESCRIBE = "describe";
@@ -54,11 +58,11 @@ public class DataFireBase {
     final private String DISCOUNT = "discount";
     final private String TOPPING = "topping";
     final private String NUMBER_OF_ORDERS = "number_of_orders";
-    public DataFireBase(DataStoreCallBack dataStoreCallBack) {
+    public DataFireBase(DataStoreCallBack dataStoreCallBack, Activity activity) {
         init();
-        getInformationLogin(dataStoreCallBack);
+        getInformationLogin(activity);
         mDataStoreCallBack = dataStoreCallBack;
-        refListStore.addValueEventListener(new ValueEventListener() {
+        refListStore.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot storeFireBase : dataSnapshot.getChildren()) {
@@ -123,6 +127,88 @@ public class DataFireBase {
 
             }
         });
+
+
+
+
+    }
+
+    public void getHistory(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+        String pathHistory = "/" + LIST_USER + "/" + uid + "/" + HISTORY;
+        DatabaseReference refHistory = database.getReference(pathHistory);
+        refHistory.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                ArrayList<HistoryModel> historyModelArrayList = new ArrayList<>();
+                for (DataSnapshot historyFireBase : dataSnapshot.getChildren()) {
+                    HistoryModel historyModel = new HistoryModel();
+                    Log.d("historyid", historyFireBase.getKey());
+                    // get cart
+                    Cart cart = new Cart();
+                    int priceCart = historyFireBase.child(CART).child(PRICE).getValue(Integer.class);
+                    ArrayList<MilkTeaInCart> milkTeaInCartArrayList = new ArrayList<>();
+                    for (DataSnapshot milkTeaInCartFireBase : historyFireBase.child(CART).getChildren()) {
+                        if (milkTeaInCartFireBase.getKey().equals(PRICE)){
+                            continue;
+                        }
+                        MilkTeaInCart milkTeaInCart = new MilkTeaInCart();
+                        String nameMilk = milkTeaInCartFireBase.child(NAME).getValue(String.class);
+                        Log.d("hissss", priceCart + milkTeaInCartFireBase.getKey());
+                        int numOfOrders = milkTeaInCartFireBase.child(NUMBER_OF_ORDERS).getValue(Integer.class);
+                        int priceMilk = milkTeaInCartFireBase.child(PRICE).getValue(Integer.class);
+                        String toppingMilk = milkTeaInCartFireBase.child(TOPPING).getValue(String.class);
+                        milkTeaInCart.setName(nameMilk);
+//                        milkTeaInCart.setNumberOfOrders(numOfOrders);
+                        milkTeaInCart.setPrice(priceMilk);
+                        milkTeaInCart.setListTopping(toppingMilk);
+                        milkTeaInCart.setNumberOfOrders(numOfOrders);
+                        milkTeaInCartArrayList.add(milkTeaInCart);
+                    }
+                    cart.setSumPrice(priceCart);
+                    cart.setListMilkTeaInCart(milkTeaInCartArrayList);
+                    historyModel.setCart(cart);
+                    // get information store
+                    String addStore = historyFireBase.child(INFO).child(ADDRESS).getValue(String.class);
+                    int phoneStore = historyFireBase.child(INFO).child(PHONE).getValue(Integer.class);
+                    Information informationStore = new Information(addStore, phoneStore);
+                    historyModel.setInformationStore(informationStore);
+                    // get information user
+                    User userFireBase = new User();
+                    String nameUser = (String) historyFireBase.child(USER).child(NAME).getValue();
+                    String addUser = (String) historyFireBase.child(USER).child(INFO).child(ADDRESS).getValue();
+                    String stringPhone = historyFireBase.child(USER).child(INFO).child(PHONE).getValue(String.class);
+                    int phoneUser;
+                    if (stringPhone.equals("")) {
+                        phoneUser = 0;
+                    }else{
+                        phoneUser = Integer.parseInt(stringPhone);
+                    }
+                    userFireBase.setName(nameUser);
+                    userFireBase.setInformation(new Information(addUser, phoneUser));
+                    historyModel.setUser(userFireBase);
+                    // get time order
+                    String timeOrder = (String) historyFireBase.child(TIMEORDER).getValue();
+                    historyModel.setTimeOrder(timeOrder);
+                    // get img store
+                    String imgStore = (String) historyFireBase.child(IMG).getValue();
+                    historyModel.setImgStore(imgStore);
+                    // get name store
+                    String nameStore = (String) historyFireBase.child(NAME).getValue();
+                    historyModel.setNameStore(nameStore);
+                    historyModelArrayList.add(historyModel);
+
+                }
+                mDataStoreCallBack.onReceiveHistory(historyModelArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void init() {
@@ -133,11 +219,11 @@ public class DataFireBase {
 //        randomListStore(20);
     }
 
-    private void getInformationLogin(DataStoreCallBack dataStoreCallBack) {
-        informationLogin = new InformationLogin((Activity) dataStoreCallBack);
+    private void getInformationLogin(Activity activity) {
+        informationLogin = new InformationLogin(activity);
         if (informationLogin.getIsLogined()) {
             uidLocal = informationLogin.getUid();
-            refListUser.addValueEventListener(new ValueEventListener() {
+            refListUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     boolean isExisted = false;
@@ -166,7 +252,7 @@ public class DataFireBase {
         refListUser.child(uid).child(NAME).setValue(name);
     }
 
-    public void setNewCart(Information information, Cart cart) {
+    public void setNewCart(Information information, Cart cart, String imgStore, String nameStore) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         Date currentTime = Calendar.getInstance().getTime();
@@ -179,14 +265,20 @@ public class DataFireBase {
         Log.d("uid", uid + "");
         // set time
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss - MM/dd/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss - MM/dd/yyyy", Locale.ROOT);
         String timeOrder = dateFormat.format(calendar.getTime());
-
         refHistory.child(TIMEORDER).setValue(timeOrder);
+        // set information user
+        refHistory.child(USER).child(NAME).setValue(user.getDisplayName());
+        refHistory.child(USER).child(INFO).child(ADDRESS).setValue("dia chi");
+        refHistory.child(USER).child(INFO).child(PHONE).setValue(informationLogin.getPhone());
         // set information store
+        refHistory.child(IMG).setValue(imgStore);
+        refHistory.child(NAME).setValue(nameStore);
         refHistory.child(INFO).child(ADDRESS).setValue(information.getAddress());
         refHistory.child(INFO).child(PHONE).setValue(information.getPhoneNumber());
         // set cart
+        refHistory.child(CART).child(PRICE).setValue(cart.getSumPrice());
         for (MilkTeaInCart milkTeaInCart : cart.getListMilkTeaInCart()) {
             String nameMilkTea = milkTeaInCart.getName();
             refHistory.child(CART).child(nameMilkTea).child(NAME).setValue(milkTeaInCart.getName());

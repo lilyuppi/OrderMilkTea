@@ -1,5 +1,6 @@
 package com.example.ordermilktea.Activity;
 
+import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
 import com.example.ordermilktea.Adapter.MainViewPagerAdapter;
@@ -19,6 +21,7 @@ import com.example.ordermilktea.Fragment.HistoryFragment;
 import com.example.ordermilktea.Fragment.CaNhanFragment;
 import com.example.ordermilktea.Fragment.LoveFragment;
 import com.example.ordermilktea.Fragment.TrangChuFragment;
+import com.example.ordermilktea.Model.HistoryModel;
 import com.example.ordermilktea.Model.Store;
 import com.example.ordermilktea.R;
 import com.github.ybq.android.spinkit.SpinKitView;
@@ -38,13 +41,15 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
     private SpinKitView spinKitView;
     private LinearLayout linearLayoutLoading;
     DataFireBase dataFireBase;
+    public static Activity main;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        main = this;
         map();
         initLoading();
-        dataFireBase = new DataFireBase(this);
+        dataFireBase = new DataFireBase(this, this);
         printhashkey();
     }
 
@@ -89,6 +94,12 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
         tabLayout.getTabAt(2).setIcon(R.drawable.baseline_favorite_black_18dp);
         tabLayout.getTabAt(3).setIcon(R.drawable.baseline_person_black_18dp);
     }
+
+    @Override
+    public void onReceiveHistory(ArrayList<HistoryModel> historyModelArrayList) {
+
+    }
+
     public void printhashkey(){
 
         try {

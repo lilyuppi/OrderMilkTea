@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imagestore"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
+    <TextView
+        android:id="@+id/namestore"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/imagestore"
+        android:text="Soya Garden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/nameaddress"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@id/namestore"
+        android:text="Mỹ Đình Plaza"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/youraddress"
+        android:layout_marginLeft="5dp"
+        android:text="Đại học Quốc Gia Hà Nội"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/namestore"
+        android:layout_toRightOf="@id/imagestore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/timeordered"
+        android:text="12:31"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/imagestore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/numberordered"
+        android:text="3 phần"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/imagestore"
+        android:layout_toRightOf="@id/timeordered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/moneyordered"
+        android:text="103,000"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/imagestore"
+        android:layout_toRightOf="@id/numberordered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/methodpay"
+        android:text="Tiền mặt"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/imagestore"
+        android:layout_toRightOf="@id/moneyordered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

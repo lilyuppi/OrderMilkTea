@@ -11,6 +11,8 @@ public class MilkTeaInCart implements Serializable {
     private ArrayList<String> topping;
     private int price;
     private int priceTopping;
+    private String listTopping;
+
     public MilkTeaInCart() {
         this.priceTopping = 5000;
     }
@@ -69,5 +71,19 @@ public class MilkTeaInCart implements Serializable {
 
     public void setPriceTopping(int priceTopping) {
         this.priceTopping = priceTopping;
+    }
+
+    public String getListTopping() {
+        String listTopping = "";
+        for (String topping1 : getTopping()) {
+            listTopping += ", ";
+            listTopping += topping1;
+        }
+        listTopping = "[" + getIce() + ", " + getSugar() + listTopping + "]";
+        return listTopping;
+    }
+
+    public void setListTopping(String listTopping) {
+        this.listTopping = listTopping;
     }
 }
