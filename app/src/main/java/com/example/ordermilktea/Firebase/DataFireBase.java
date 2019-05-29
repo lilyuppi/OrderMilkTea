@@ -202,7 +202,11 @@ public class DataFireBase {
                         historyModelArrayList.add(historyModel);
 
                     }
-                    mDataStoreCallBack.onReceiveHistory(historyModelArrayList);
+                    ArrayList<HistoryModel> list = new ArrayList<>();
+                    for (int i = historyModelArrayList.size() - 1; i >= 0; i--) {
+                        list.add(historyModelArrayList.get(i));
+                    }
+                    mDataStoreCallBack.onReceiveHistory(list);
                 }
 
                 @Override
