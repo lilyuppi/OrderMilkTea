@@ -17,8 +17,8 @@ import java.util.Locale;
 
 public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder> {
 
-    ArrayList<MilkTeaInCart> milkTeaInCartArrayList;
-    Context context;
+    private ArrayList<MilkTeaInCart> milkTeaInCartArrayList;
+    private Context context;
 
     public PayAdapter(ArrayList<MilkTeaInCart> milkTeaInCartArrayList, Context context) {
         this.milkTeaInCartArrayList = milkTeaInCartArrayList;
@@ -28,31 +28,31 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater=LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.dong_pay,viewGroup,false);
-        return  new ViewHolder(view);
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View view = inflater.inflate(R.layout.item_pay, viewGroup, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final MilkTeaInCart milkTeaInCart = milkTeaInCartArrayList.get(i);
         final int numberOfOrders = milkTeaInCart.getNumberOfOrders();
-        viewHolder.soluongsanpham.setText(numberOfOrders+"");
-        viewHolder.tensanpham.setText(milkTeaInCart.getName());
-        viewHolder.tien.setText(milkTeaInCart.getPrice()+"");
+        viewHolder.tvNumOfOrders.setText(numberOfOrders + "");
+        viewHolder.tvName.setText(milkTeaInCart.getName());
+        viewHolder.tvPrice.setText(milkTeaInCart.getPrice() + "");
         String listTopping = "";
         for (String topping : milkTeaInCart.getTopping()) {
             listTopping += ", ";
             listTopping += topping;
         }
-        viewHolder.topping.setText("[" + milkTeaInCart.getIce() + ", " + milkTeaInCart.getSugar() + listTopping + "]");
+        viewHolder.tvTopping.setText("[" + milkTeaInCart.getIce() + ", " + milkTeaInCart.getSugar() + listTopping + "]");
         /**
          *  tổng tiền cho từng sản phẩm
          */
         int price_one = milkTeaInCart.getPrice();
         int price_sum = numberOfOrders * price_one;
         String str = NumberFormat.getNumberInstance(Locale.US).format(price_sum);
-        viewHolder.tien.setText(str);
+        viewHolder.tvPrice.setText(str);
 
     }
 
@@ -62,14 +62,15 @@ public class PayAdapter extends RecyclerView.Adapter<PayAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView soluongsanpham,tensanpham,tien,topping,tongsoluong;
+        TextView tvNumOfOrders, tvName, tvPrice, tvTopping, tvAllNumOfOrders;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            soluongsanpham=itemView.findViewById(R.id.so_luong_san_pham);
-            tensanpham=itemView.findViewById(R.id.ten_san_pham);
-            tien=itemView.findViewById(R.id.money);
-            topping=itemView.findViewById(R.id.sugar_ice_topping);
-            tongsoluong=itemView.findViewById(R.id.tong_so_luong);
+            tvNumOfOrders = itemView.findViewById(R.id.tv_num_of_order);
+            tvName = itemView.findViewById(R.id.tv_name);
+            tvPrice = itemView.findViewById(R.id.money);
+            tvTopping = itemView.findViewById(R.id.tv_sugar_ice_topping);
+            tvAllNumOfOrders = itemView.findViewById(R.id.tv_all_num_of_orders);
         }
     }
 }

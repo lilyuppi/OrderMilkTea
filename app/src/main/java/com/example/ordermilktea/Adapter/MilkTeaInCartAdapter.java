@@ -18,8 +18,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class MilkTeaInCartAdapter extends RecyclerView.Adapter<MilkTeaInCartAdapter.ViewHolder> {
-    ArrayList<MilkTeaInCart> listMilkTeaInCart;
-    Context context;
+    private ArrayList<MilkTeaInCart> listMilkTeaInCart;
+    private Context context;
 
     public MilkTeaInCartAdapter(ArrayList<MilkTeaInCart> listMilkTeaInCart, Context context) {
         this.listMilkTeaInCart = listMilkTeaInCart;

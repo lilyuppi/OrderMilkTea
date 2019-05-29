@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class Cart implements Serializable, Cloneable {
     private ArrayList<MilkTeaInCart> listMilkTeaInCart;
     private int sumPrice;
+
     public Cart() {
         this.listMilkTeaInCart = new ArrayList<>();
     }
@@ -26,13 +27,14 @@ public class Cart implements Serializable, Cloneable {
         this.sumPrice = sumPrice;
     }
 
-    public void calSumPrice(){
+    public void calSumPrice() {
         sumPrice = 0;
         for (MilkTeaInCart milkTeaInCart : listMilkTeaInCart) {
             int price = milkTeaInCart.getPrice() * milkTeaInCart.getNumberOfOrders();
             sumPrice += price;
         }
     }
+
     protected Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

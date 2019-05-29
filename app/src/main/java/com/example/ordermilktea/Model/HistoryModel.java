@@ -7,6 +7,7 @@ public class HistoryModel {
     private User user;
     private String imgStore;
     private String nameStore;
+
     public HistoryModel() {
     }
 

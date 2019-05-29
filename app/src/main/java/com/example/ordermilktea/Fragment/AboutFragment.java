@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
-public class CaNhanFragment extends Fragment {
+public class AboutFragment extends Fragment {
     private static final int MY_RESQUEST_CODE = 1111;
     List<AuthUI.IdpConfig> providers;
     private CircleImageView imvAvatar;
@@ -57,11 +56,12 @@ public class CaNhanFragment extends Fragment {
     private boolean isEditPhone;
     private ListView listView;
     ArrayAdapter<String> adapter;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_ca_nhan, container, false);
+        view = inflater.inflate(R.layout.fragment_about, container, false);
         map(view);
         FacebookSdk.sdkInitialize(getActivity().getApplicationContext());
         AppEventsLogger.activateApp(getActivity().getApplicationContext());
@@ -72,11 +72,11 @@ public class CaNhanFragment extends Fragment {
         );
 
 
-        listView = (ListView)getActivity().findViewById(R.id.lv_listview);
+        listView = (ListView) getActivity().findViewById(R.id.lv_listview);
         final String[] trangCaNhan = new String[]{"Lịch sử",
-                                                  "Mã khuyến mại của tôi",
-                                                  "Địa chỉ",
-                                                  "About team" };
+                "Mã khuyến mại của tôi",
+                "Địa chỉ",
+                "About team"};
 
         ListView listView = (ListView) view.findViewById(R.id.lv_listview);
 
@@ -86,14 +86,14 @@ public class CaNhanFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 0){
+                if (position == 0) {
                     ViewPager viewPager = getActivity().findViewById(R.id.myViewPager);
                     viewPager.setCurrentItem(1);
                 }
-                if(position == 3){
+                if (position == 3) {
                     AboutTeamFragment aboutTeam = new AboutTeamFragment();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_canhan, aboutTeam);
+                    fragmentTransaction.replace(R.id.fragment_about, aboutTeam);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }
@@ -124,7 +124,7 @@ public class CaNhanFragment extends Fragment {
                     etPhone.setVisibility(View.VISIBLE);
                     tvPhone.setVisibility(View.GONE);
                     btnEditPhone.setText("Hoàn tất");
-                }else {
+                } else {
                     etPhone.setVisibility(View.GONE);
                     tvPhone.setVisibility(View.VISIBLE);
                     btnEditPhone.setText("Sửa");
@@ -231,9 +231,11 @@ public class CaNhanFragment extends Fragment {
         btnLogout.setVisibility(View.VISIBLE);
         viewLogin.setEnabled(false);
         informationLogin.setSharedPre(mIsLogined, user.getUid(), mPhone);
+
+        tvName.setText(user.getDisplayName() + "");
+        etPhone.setText(informationLogin.getPhone() + "");
+        tvPhone.setText(informationLogin.getPhone() + "");
     }
-
-
 
 
     @Override
@@ -246,7 +248,14 @@ public class CaNhanFragment extends Fragment {
 //            btnLogout.setVisibility(View.VISIBLE);
             btnEditPhone.setText("Sửa");
             updateAfterLogin();
+        } else {
+
+            tvPhone.setVisibility(View.GONE);
+            btnEditPhone.setVisibility(View.GONE);
+            tvName.setVisibility(View.VISIBLE);
+            tvName.setText("Đăng nhập");
         }
     }
+
 
 }

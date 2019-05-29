@@ -32,6 +32,7 @@ public class BottomSheetDialogShowCart extends BottomSheetDialogFragment {
     private TextView tvAccept;
     private Cart mCart;
     private MilkTeaInCartAdapter milkTeaInCartAdapter;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

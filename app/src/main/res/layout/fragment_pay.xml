@@ -24,14 +24,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp">
                 <TextView
-                    android:id="@+id/tong_tien"
+                    android:id="@+id/tv_sum"
                     android:gravity="center"
                     android:text="Tổng cộng:"
                     android:layout_width="80dp"
                     android:layout_height="30dp" />
                 <TextView
-                    android:layout_toRightOf="@id/tong_tien"
-                    android:id="@+id/tong_so_luong"
+                    android:layout_toRightOf="@id/tv_sum"
+                    android:id="@+id/tv_all_num_of_orders"
                     android:textColor="#000"
                     android:gravity="center"
                     android:textStyle="bold"
@@ -40,28 +40,28 @@
                     android:layout_width="20dp"
                     android:layout_height="30dp" />
                 <TextView
-                    android:layout_toRightOf="@id/tong_so_luong"
+                    android:layout_toRightOf="@id/tv_all_num_of_orders"
                     android:text="phần"
                     android:gravity="center"
                     android:layout_width="40dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:gravity="center"
-                    android:id="@+id/tong_tien_tra"
+                    android:id="@+id/tv_sum_price"
                     android:layout_alignParentRight="true"
                     android:text="100,000đ"
                     android:layout_width="80dp"
                     android:layout_height="30dp" />
                 <TextView
-                    android:layout_below="@id/tong_tien"
+                    android:layout_below="@id/tv_sum"
                     android:text="Phí vận chuyển"
-                    android:id="@+id/phi_van_chuyen"
+                    android:id="@+id/tv_ship_price_text"
                     android:layout_width="130dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:gravity="center"
-                    android:layout_below="@id/tong_tien"
-                    android:id="@+id/tien_ship"
+                    android:layout_below="@id/tv_sum"
+                    android:id="@+id/tv_ship_price"
                     android:layout_alignParentRight="true"
                     android:text="15,000đ"
                     android:layout_width="80dp"
@@ -70,15 +70,15 @@
                     android:textColor="#000"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:layout_below="@id/phi_van_chuyen"
+                    android:layout_below="@id/tv_ship_price_text"
                     android:text="Tổng cộng:"
                     android:id="@+id/sum"
                     android:layout_width="130dp"
                     android:layout_height="30dp" />
                 <TextView
                     android:gravity="center"
-                    android:layout_below="@id/phi_van_chuyen"
-                    android:id="@+id/sum_tien"
+                    android:layout_below="@id/tv_ship_price_text"
+                    android:id="@+id/tv_sum_price_after"
                     android:layout_alignParentRight="true"
                     android:text="15,000đ"
                     android:layout_width="80dp"

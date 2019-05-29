@@ -11,16 +11,15 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 
 import com.example.ordermilktea.Adapter.MainViewPagerAdapter;
 import com.example.ordermilktea.Firebase.DataFireBase;
 import com.example.ordermilktea.Firebase.DataStoreCallBack;
 import com.example.ordermilktea.Fragment.HistoryFragment;
-import com.example.ordermilktea.Fragment.CaNhanFragment;
+import com.example.ordermilktea.Fragment.AboutFragment;
 import com.example.ordermilktea.Fragment.LoveFragment;
-import com.example.ordermilktea.Fragment.TrangChuFragment;
+import com.example.ordermilktea.Fragment.HomeFragment;
 import com.example.ordermilktea.Model.HistoryModel;
 import com.example.ordermilktea.Model.Store;
 import com.example.ordermilktea.R;
@@ -77,22 +76,23 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
         int uiOptions = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         decorView.setSystemUiVisibility(uiOptions);
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
-        TrangChuFragment trangChuFragment = new TrangChuFragment();
+        HomeFragment homeFragment = new HomeFragment();
         LoveFragment loveFragment = new LoveFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("store", listStore);
-        trangChuFragment.setArguments(bundle);
+        homeFragment.setArguments(bundle);
         loveFragment.setArguments(bundle);
-        mainViewPagerAdapter.addFragment(trangChuFragment,"");
-        mainViewPagerAdapter.addFragment(new HistoryFragment(),"");
-        mainViewPagerAdapter.addFragment(loveFragment,"");
-        mainViewPagerAdapter.addFragment(new CaNhanFragment(),"");
+        mainViewPagerAdapter.addFragment(homeFragment, "");
+        mainViewPagerAdapter.addFragment(new HistoryFragment(), "");
+        mainViewPagerAdapter.addFragment(loveFragment, "");
+        mainViewPagerAdapter.addFragment(new AboutFragment(), "");
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.baseline_home_black_18dp);
         tabLayout.getTabAt(1).setIcon(R.drawable.baseline_assignment_black_18dp);
         tabLayout.getTabAt(2).setIcon(R.drawable.baseline_favorite_black_18dp);
         tabLayout.getTabAt(3).setIcon(R.drawable.baseline_person_black_18dp);
+
     }
 
     @Override
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements DataStoreCallBack
 
     }
 
-    public void printhashkey(){
+    public void printhashkey() {
 
         try {
             PackageInfo info = getPackageManager().getPackageInfo(

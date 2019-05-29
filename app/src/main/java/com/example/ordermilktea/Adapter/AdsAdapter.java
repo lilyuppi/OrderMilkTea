@@ -16,11 +16,11 @@ import com.example.ordermilktea.R;
 
 import java.util.ArrayList;
 
-public class QuangCaoAdapter extends FragmentPagerAdapter {
+public class AdsAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> arrayFragment = new ArrayList<>();
-    private ArrayList<String> arrayTittle =  new ArrayList<>();
+    private ArrayList<String> arrayTittle = new ArrayList<>();
 
-    public QuangCaoAdapter(FragmentManager fm) {
+    public AdsAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -33,7 +33,8 @@ public class QuangCaoAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return arrayFragment.size();
     }
-    public void addFragment(Fragment fragment,String tittle){
+
+    public void addFragment(Fragment fragment, String tittle) {
         arrayFragment.add(fragment);
         arrayTittle.add(tittle);
     }

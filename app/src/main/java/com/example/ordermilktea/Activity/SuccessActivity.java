@@ -11,55 +11,56 @@ import android.widget.TextView;
 import com.example.ordermilktea.R;
 
 public class SuccessActivity extends AppCompatActivity {
-    TextView success;
-    ImageView imgsuccess0, imgsucces1;
+    private TextView tvSuccess;
+    private ImageView imvSuccess1, imvSuccess2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_success);
-        success = findViewById(R.id.successtext);
-        imgsuccess0 = findViewById(R.id.blacksuccess);
-        imgsucces1 = findViewById(R.id.greensuccess);
+        tvSuccess = findViewById(R.id.tvSuccess);
+        imvSuccess1 = findViewById(R.id.blacksuccess);
+        imvSuccess2 = findViewById(R.id.imvGreenSuccess);
 
-        Thread bamgio = new Thread() { // hàm chạy gif sau 5s tự chuyển sang màn hình chính
+        Thread timer = new Thread() { // hàm chạy gif sau 5s tự chuyển sang màn hình chính
             public void run() {
                 try {
                     sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    imgsuccess0.setVisibility(View.VISIBLE);
-                    imgsucces1.setVisibility(View.GONE);
+                    imvSuccess1.setVisibility(View.VISIBLE);
+                    imvSuccess2.setVisibility(View.GONE);
                 }
             }
         };
-        bamgio.start();
+        timer.start();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Do something after 5s = 5000ms
-                imgsuccess0.setVisibility(View.GONE);
-                imgsucces1.setVisibility(View.VISIBLE);
+                imvSuccess1.setVisibility(View.GONE);
+                imvSuccess2.setVisibility(View.VISIBLE);
             }
         }, 3000);
 
-        Thread chuyen = new Thread() { // hàm chạy gif sau 5s tự chuyển sang màn hình chính
+        Thread transistion = new Thread() { // hàm chạy gif sau 5s tự chuyển sang màn hình chính
             public void run() {
                 try {
                     sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    Intent intent = new Intent(SuccessActivity.this,MainActivity.class);
+                    Intent intent = new Intent(SuccessActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
             }
         };
-        chuyen.start();
+        transistion.start();
     }
 
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         finish();
     }

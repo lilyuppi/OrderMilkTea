@@ -18,13 +18,14 @@ import java.util.ArrayList;
 
 public class LoveFragment extends Fragment {
 
-    View view;
-    ArrayList<Store> listStore;
+    private View view;
+    private ArrayList<Store> listStore;
+
     @Override
-    public View onCreateView(@NonNull  LayoutInflater inflater,@Nullable ViewGroup container,
-                             @Nullable  Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_love, container, false);
+        view = inflater.inflate(R.layout.fragment_love, container, false);
 
         listStore = (ArrayList<Store>) getArguments().getSerializable("store");
 
@@ -37,8 +38,8 @@ public class LoveFragment extends Fragment {
         bundle.putSerializable("store", listStore);
         mostOrderFragment.setArguments(bundle);
         lovedFragment.setArguments(bundle);
-        fragmentTransaction.add(R.id.fragment_most_order,mostOrderFragment);
-        fragmentTransaction.add(R.id.fragment_blank_fragment2,lovedFragment);
+        fragmentTransaction.add(R.id.fragment_most_order, mostOrderFragment);
+        fragmentTransaction.add(R.id.fragment_blank_fragment2, lovedFragment);
         fragmentTransaction.commit();
         return view;
     }

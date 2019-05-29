@@ -1,7 +1,6 @@
 package com.example.ordermilktea.Fragment;
 
 
-import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,23 +13,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.ordermilktea.Firebase.DataStoreCallBack;
 import com.example.ordermilktea.Model.Store;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.example.ordermilktea.Adapter.MainViewPagerAdapter;
-import com.example.ordermilktea.Adapter.QuangCaoAdapter;
+import com.example.ordermilktea.Adapter.AdsAdapter;
 import com.example.ordermilktea.R;
 
 import java.util.ArrayList;
 
 
-public class QuangCaoFragment extends Fragment {
+public class AdsFragment extends Fragment {
 
     ArrayList<String> listBanner = new ArrayList<>();
     ArrayList<Store> mListStore = new ArrayList<>();
@@ -38,7 +29,7 @@ public class QuangCaoFragment extends Fragment {
     ViewPager viewPagerbanner;
     TabLayout tabLayoutbanner;
     //CircleIndicator circleIndicator;
-    // QuangCaoAdapter quangCaoAdapter;
+    // AdsAdapter quangCaoAdapter;
 
     Image img;
 
@@ -50,7 +41,7 @@ public class QuangCaoFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull  LayoutInflater inflater,@Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        view=inflater.inflate(R.layout.fragment_quang_cao,container,false);
+        view = inflater.inflate(R.layout.fragment_ads, container, false);
 
         Log.d("print", "onCreateView: ");
         anhxa();
@@ -60,13 +51,13 @@ public class QuangCaoFragment extends Fragment {
 
     private void init() {
         mListStore = (ArrayList<Store>) getArguments().getSerializable("store");
-        QuangCaoAdapter quangCaoAdapter = new QuangCaoAdapter(getFragmentManager());
+        AdsAdapter adsAdapter = new AdsAdapter(getFragmentManager());
         for (int i = 0; i < 3; i++){
             Banner1Fragment banner1Fragment = new Banner1Fragment();
             Bundle bundle = new Bundle();
             bundle.putSerializable("store", mListStore.get(i));
             banner1Fragment.setArguments(bundle);
-            quangCaoAdapter.addFragment(banner1Fragment, "1");
+            adsAdapter.addFragment(banner1Fragment, "1");
         }
         handler=new Handler();
         runnable=new Runnable() {
@@ -82,7 +73,7 @@ public class QuangCaoFragment extends Fragment {
             }
         };
         handler.postDelayed(runnable,3000);
-        viewPagerbanner.setAdapter(quangCaoAdapter);
+        viewPagerbanner.setAdapter(adsAdapter);
         tabLayoutbanner.setupWithViewPager(viewPagerbanner);
     }
 

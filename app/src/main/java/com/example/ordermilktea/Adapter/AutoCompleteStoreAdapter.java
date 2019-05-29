@@ -14,8 +14,6 @@ import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Model.Store;
 import com.example.ordermilktea.R;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +35,12 @@ public class AutoCompleteStoreAdapter extends ArrayAdapter<Store> {
     @Override
     public View getView(int position, @NonNull View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.dong_suggest, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_suggest, parent, false);
         }
 
         TextView tvName = convertView.findViewById(R.id.textviewsuggest);
         ImageView imvAvatar = convertView.findViewById(R.id.imageviewsuggest);
-        TextView tvNumberOfOrders = convertView.findViewById(R.id.soluongdat);
+        TextView tvNumberOfOrders = convertView.findViewById(R.id.tv_num_of_orders);
         TextView tvDiscount = convertView.findViewById(R.id.sale);
         View viewAirPay = convertView.findViewById(R.id.airPay);
         View viewFreeShip = convertView.findViewById(R.id.freeShip);
@@ -99,7 +97,7 @@ public class AutoCompleteStoreAdapter extends ArrayAdapter<Store> {
         }
     };
 
-    public interface OnItemClickedListener{
+    public interface OnItemClickedListener {
         void onItemClick(Store store);
     }
 

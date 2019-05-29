@@ -14,13 +14,11 @@ import com.example.ordermilktea.Model.HistoryModel;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.R;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
-    ArrayList<HistoryModel> historyModelArrayList;
-    Context context;
+    private ArrayList<HistoryModel> historyModelArrayList;
+    private Context context;
 
     public HistoryAdapter(ArrayList<HistoryModel> historyModelArrayList, Context context) {
         this.historyModelArrayList = historyModelArrayList;
@@ -30,8 +28,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @NonNull
     @Override
     public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        LayoutInflater inflater=LayoutInflater.from(viewGroup.getContext());
-        View view = inflater.inflate(R.layout.dong_history,viewGroup,false);
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View view = inflater.inflate(R.layout.item_history, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -54,21 +52,23 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return historyModelArrayList.size();    }
+        return historyModelArrayList.size();
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgstore;
-        TextView namestore,addressstore,address,timeorder,numberorder,money,methodpay;
+        TextView namestore, addressstore, address, timeorder, numberorder, money, methodpay;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgstore=itemView.findViewById(R.id.imagestore);
-            namestore=itemView.findViewById(R.id.namestore);
-            addressstore=itemView.findViewById(R.id.nameaddress);
-            address=itemView.findViewById(R.id.youraddress);
-            timeorder=itemView.findViewById(R.id.timeordered);
-            numberorder=itemView.findViewById(R.id.numberordered);
-            money=itemView.findViewById(R.id.moneyordered);
-            methodpay=itemView.findViewById(R.id.methodpay);
+            imgstore = itemView.findViewById(R.id.imv_store);
+            namestore = itemView.findViewById(R.id.tv_name_store);
+            addressstore = itemView.findViewById(R.id.tv_add_store);
+            address = itemView.findViewById(R.id.tv_add_user);
+            timeorder = itemView.findViewById(R.id.tv_time_order);
+            numberorder = itemView.findViewById(R.id.tv_num_of_order);
+            money = itemView.findViewById(R.id.tv_sum_price);
+            methodpay = itemView.findViewById(R.id.tv_method);
 
         }
     }

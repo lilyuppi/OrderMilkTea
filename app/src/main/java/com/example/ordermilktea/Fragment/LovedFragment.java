@@ -14,11 +14,12 @@ import com.example.ordermilktea.R;
  */
 public class LovedFragment extends Fragment {
     View view;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_loved, container, false);
+        view = inflater.inflate(R.layout.fragment_loved, container, false);
         return view;
     }
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAFAFA"
-    tools:context=".Fragment.TrangChuFragment">
+    tools:context=".Fragment.HomeFragment">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -38,14 +38,9 @@
                     android:layout_height="wrap_content"
                     android:elevation="1dp"
                     android:orientation="vertical">
-                    <!--<fragment-->
-                    <!--android:name="com.example.ordermilktea.Fragment.QuangCaoFragment"-->
-                    <!--android:id="@+id/fragmentquangcao"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"/>-->
 
                     <LinearLayout
-                        android:id="@+id/fragment_quang_cao"
+                        android:id="@+id/fragment_ads"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">

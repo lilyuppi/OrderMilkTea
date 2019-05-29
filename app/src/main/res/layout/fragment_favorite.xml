@@ -15,12 +15,12 @@
             android:textStyle="bold"
             android:textSize="20sp"
             android:textColor="#101010"
-            android:id="@+id/textviewtitleAlbum"
+            android:id="@+id/tv_title_album"
             android:text="Yêu thích"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/textviewxemthemfavorite"
+            android:id="@+id/tv_expand"
             android:textColor="#03A9F4"
             android:textSize="15sp"
             android:layout_alignParentRight="true"

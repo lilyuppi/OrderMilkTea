@@ -2,10 +2,6 @@ package com.example.ordermilktea.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,19 +12,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Model.Store;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.example.ordermilktea.R;
 
 import java.util.ArrayList;
 
-public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHolder> {
+public class SuggestAdapter extends RecyclerView.Adapter<SuggestAdapter.ViewHolder> {
 
-    Context context;
-    ArrayList<Store> listStore;
+    private Context context;
+    private ArrayList<Store> listStore;
 
     public SuggestAdapter(Context context, ArrayList<Store> stores) {
         this.context = context;
@@ -39,7 +30,7 @@ public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHol
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view=inflater.inflate(R.layout.dong_suggest,viewGroup,false);
+        View view = inflater.inflate(R.layout.item_suggest, viewGroup, false);
 
         return new ViewHolder(view);
     }
@@ -50,11 +41,11 @@ public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHol
         int discount = store.getDiscount();
         //int set= store.getNumberOfOrders();
 
-        viewHolder.tenquan.setText(store.getName());
-        Glide.with(context).load(store.getImgSrc()).into(viewHolder.anhquan);
-        //viewHolder.diachi.setText(String.valueOf(set)+"+");
-        viewHolder.diachi.setText(store.getInformation().getAddress());
-        viewHolder.sale.setText(String.valueOf(discount)+ "%");
+        viewHolder.tvName.setText(store.getName());
+        Glide.with(context).load(store.getImgSrc()).into(viewHolder.imvAvatar);
+        //viewHolder.tvAddress.setText(String.valueOf(set)+"+");
+        viewHolder.tvAddress.setText(store.getInformation().getAddress());
+        viewHolder.tvDiscount.setText(String.valueOf(discount) + "%");
         viewHolder.relativeLayout_suggest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,25 +59,28 @@ public class SuggestAdapter  extends RecyclerView.Adapter<SuggestAdapter.ViewHol
         return listStore.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView anhquan;
-        TextView tenquan;
-        TextView diachi;
-        TextView sale;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imvAvatar;
+        TextView tvName;
+        TextView tvAddress;
+        TextView tvDiscount;
         RelativeLayout relativeLayout_suggest;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            anhquan=itemView.findViewById(R.id.imageviewsuggest);
-            tenquan=itemView.findViewById(R.id.textviewsuggest);
-            diachi=itemView.findViewById(R.id.soluongdat);
-            sale = itemView.findViewById(R.id.sale);
+            imvAvatar = itemView.findViewById(R.id.imageviewsuggest);
+            tvName = itemView.findViewById(R.id.textviewsuggest);
+            tvAddress = itemView.findViewById(R.id.tv_num_of_orders);
+            tvDiscount = itemView.findViewById(R.id.sale);
             relativeLayout_suggest = itemView.findViewById(R.id.relative_layout_suggest);
 
         }
     }
-    public interface OnItemClickedListener{
+
+    public interface OnItemClickedListener {
         void onItemClick(Store store);
     }
+
     private OnItemClickedListener onItemClickedListener;
 
     public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {

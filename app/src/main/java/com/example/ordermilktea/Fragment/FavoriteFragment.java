@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 public class FavoriteFragment extends Fragment {
 
-    View view;
+    private View view;
 
-    RecyclerView recyclerView;
-    SuggestAdapter suggestAdapter;
+    private RecyclerView recyclerView;
+    private SuggestAdapter suggestAdapter;
 
     ArrayList<Store> mListStore = new ArrayList<>();
 
@@ -31,10 +31,10 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_favorite, container, false);
-        recyclerView=view.findViewById(R.id.recyclerviewFavorite);
+        view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        recyclerView = view.findViewById(R.id.recyclerviewFavorite);
         recyclerView.setHasFixedSize(true);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3,LinearLayoutManager.HORIZONTAL,false);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 3, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         mListStore = (ArrayList<Store>) getArguments().getSerializable("store");
         getArguments().remove("store");
@@ -60,7 +60,6 @@ public class FavoriteFragment extends Fragment {
         });
         return view;
     }
-
 
 
 //    @Override

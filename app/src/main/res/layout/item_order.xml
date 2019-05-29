@@ -23,7 +23,6 @@
         android:layout_height="100dp" />
     <TextView
         android:layout_below="@id/imagevieworder"
-        android:text="Nam Hot"
         android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="#100f0f"

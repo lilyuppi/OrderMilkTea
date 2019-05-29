@@ -11,14 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ordermilktea.Adapter.MilkTeaAdapter;
 import com.example.ordermilktea.Dialog.BottomSheetDialogAddToCart;
 import com.example.ordermilktea.Dialog.BottomSheetDialogShowCart;
 import com.example.ordermilktea.Model.Cart;
-import com.example.ordermilktea.Model.Information;
 import com.example.ordermilktea.Model.MilkTea;
 import com.example.ordermilktea.Model.MilkTeaInCart;
 import com.example.ordermilktea.Model.Store;
@@ -30,12 +28,13 @@ import java.util.Locale;
 
 public class StoreActivity extends AppCompatActivity {
     private ImageView imvBackDrop;
-    private TextView tvTest, tvSumPrice, tvSumItem;
+    private TextView tvNameStore, tvSumPrice, tvSumItem, tvDescribeStore;
     private ArrayList<MilkTea> listMilkTea;
     private Toolbar toolbar;
     private View viewShowCart, tvThanhToan;
     private Cart mCart;
     private Store mStore;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,14 +57,15 @@ public class StoreActivity extends AppCompatActivity {
             mStore = (Store) bundle.getSerializable("store");
             getSupportActionBar().setTitle(mStore.getName());
             toolbar.setSubtitle(mStore.getInformation().getAddress());
-            tvTest.setText(mStore.getName());
+            tvNameStore.setText(mStore.getName());
+            tvDescribeStore.setText(mStore.getInformation().getAddress());
             Glide.with(this).load(mStore.getImgSrc()).into(imvBackDrop);
             listMilkTea = mStore.getListMilkTea();
             showListMilkTea();
         }
     }
 
-    private void removeBundle(){
+    private void removeBundle() {
         getIntent().removeExtra("store");
     }
 
@@ -106,7 +106,8 @@ public class StoreActivity extends AppCompatActivity {
         });
 
     }
-    private void reloadCart(){
+
+    private void reloadCart() {
         int sumItem = 0;
         mCart.calSumPrice();
         for (MilkTeaInCart milkTeaInCart : mCart.getListMilkTeaInCart()) {
@@ -114,7 +115,7 @@ public class StoreActivity extends AppCompatActivity {
         }
         if (sumItem == 0) {
             viewShowCart.setVisibility(View.GONE);
-        }else {
+        } else {
             viewShowCart.setVisibility(View.VISIBLE);
             tvSumItem.setText(sumItem + " món");
             String str = NumberFormat.getNumberInstance(Locale.US).format(mCart.getSumPrice());
@@ -122,13 +123,15 @@ public class StoreActivity extends AppCompatActivity {
 
         }
     }
+
     private void map() {
         imvBackDrop = findViewById(R.id.imv_backdrop);
-        tvTest = findViewById(R.id.tv_test);
+        tvNameStore = findViewById(R.id.tv_name_store);
         tvSumPrice = findViewById(R.id.tv_sum_price_in_show_cart);
         tvSumItem = findViewById(R.id.tv_sum_item_milk_tea_in_cart);
+        tvDescribeStore = findViewById(R.id.tv_describe_store);
         toolbar = findViewById(R.id.toolbar);
-        tvThanhToan=findViewById(R.id.thanhtoan);
+        tvThanhToan = findViewById(R.id.thanhtoan);
         viewShowCart = findViewById(R.id.linearlayout_show_cart);
         viewShowCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,8 +159,8 @@ public class StoreActivity extends AppCompatActivity {
         tvThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(StoreActivity.this,PayActivity.class);
-                Bundle bundle=new Bundle();
+                Intent intent = new Intent(StoreActivity.this, PayActivity.class);
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("cart", mCart);
                 bundle.putString("img_store", mStore.getImgSrc());
                 bundle.putString("name_store", mStore.getName());
@@ -168,12 +171,14 @@ public class StoreActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         removeBundle();
         overridePendingTransition(R.anim.anim_slide_in_from_left, R.anim.anim_slide_out_to_right);
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();

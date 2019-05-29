@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
 
-    Context context;
-    ArrayList<Store> listStore;
+    private Context context;
+    private ArrayList<Store> listStore;
 
     public OrderAdapter(Context context, ArrayList<Store> listStore) {
         this.context = context;
@@ -30,19 +30,20 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view=inflater.inflate(R.layout.dong_order,viewGroup,false);
+        View view = inflater.inflate(R.layout.item_order, viewGroup, false);
 
-        return new ViewHolder(view);    }
+        return new ViewHolder(view);
+    }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         final Store store = listStore.get(i);
-        int set= store.getNumberOfOrders();
-        for(int i1=0;i1<listStore.size();i1++) {
-            if (set>200) {
-                viewHolder.tenquan.setText(store.getName());
-                Glide.with(context).load(store.getImgSrc()).into(viewHolder.anhquan);
-                viewHolder.soluong.setText(String.valueOf(set) + "+");
+        int set = store.getNumberOfOrders();
+        for (int i1 = 0; i1 < listStore.size(); i1++) {
+            if (set > 200) {
+                viewHolder.tvName.setText(store.getName());
+                Glide.with(context).load(store.getImgSrc()).into(viewHolder.imvAvatar);
+                viewHolder.tvNum.setText(String.valueOf(set) + "+");
             }
         }
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -54,29 +55,31 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
 
-
     @Override
     public int getItemCount() {
         return listStore.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView anhquan;
-        TextView tenquan;
-        TextView soluong;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imvAvatar;
+        TextView tvName;
+        TextView tvNum;
         CardView relativeLayout;
+
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
-            anhquan=itemView.findViewById(R.id.imagevieworder);
-            tenquan=itemView.findViewById(R.id.textvieworder);
-            soluong=itemView.findViewById(R.id.textviewset);
+            imvAvatar = itemView.findViewById(R.id.imagevieworder);
+            tvName = itemView.findViewById(R.id.textvieworder);
+            tvNum = itemView.findViewById(R.id.textviewset);
             relativeLayout = itemView.findViewById(R.id.relative_layout_order);
 
         }
     }
-    public interface OnItemClickedListener{
+
+    public interface OnItemClickedListener {
         void onItemClick(Store store);
     }
+
     private OnItemClickedListener onItemClickedListener;
 
     public void setOnItemClickedListener(OnItemClickedListener onItemClickedListener) {

@@ -45,7 +45,6 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
     }
 
 
-
     private void listener() {
         imvSub.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +78,7 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
                 MilkTeaInCart milkTeaInCart = getMilkTeaToCart();
                 if (isChecked) {
                     priceMilkTeaAfterTopping += milkTeaInCart.getPriceTopping();
-                }else {
+                } else {
                     priceMilkTeaAfterTopping -= milkTeaInCart.getPriceTopping();
                 }
                 updatePrice();
@@ -91,7 +90,7 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
                 MilkTeaInCart milkTeaInCart = getMilkTeaToCart();
                 if (isChecked) {
                     priceMilkTeaAfterTopping += milkTeaInCart.getPriceTopping();
-                }else {
+                } else {
                     priceMilkTeaAfterTopping -= milkTeaInCart.getPriceTopping();
                 }
                 updatePrice();
@@ -103,7 +102,7 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
                 MilkTeaInCart milkTeaInCart = getMilkTeaToCart();
                 if (isChecked) {
                     priceMilkTeaAfterTopping += milkTeaInCart.getPriceTopping();
-                }else {
+                } else {
                     priceMilkTeaAfterTopping -= milkTeaInCart.getPriceTopping();
                 }
                 updatePrice();
@@ -115,7 +114,7 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
                 MilkTeaInCart milkTeaInCart = getMilkTeaToCart();
                 if (isChecked) {
                     priceMilkTeaAfterTopping += milkTeaInCart.getPriceTopping();
-                }else {
+                } else {
                     priceMilkTeaAfterTopping -= milkTeaInCart.getPriceTopping();
                 }
                 updatePrice();
@@ -127,7 +126,7 @@ public class BottomSheetDialogAddToCart extends BottomSheetDialogFragment {
                 MilkTeaInCart milkTeaInCart = getMilkTeaToCart();
                 if (isChecked) {
                     priceMilkTeaAfterTopping += milkTeaInCart.getPriceTopping();
-                }else {
+                } else {
                     priceMilkTeaAfterTopping -= milkTeaInCart.getPriceTopping();
                 }
                 updatePrice();

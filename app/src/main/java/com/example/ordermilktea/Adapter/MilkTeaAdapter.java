@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHolder> {
-    ArrayList<MilkTea> listMilkTea;
-    Context context;
+    private ArrayList<MilkTea> listMilkTea;
+    private Context context;
 
     public MilkTeaAdapter(ArrayList<MilkTea> listMilkTea, Context context) {
         this.listMilkTea = listMilkTea;
@@ -43,7 +43,7 @@ public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHold
         viewHolder.tvName.setText(milkTea.getName());
         viewHolder.tvDescribe.setText(milkTea.getDescribe());
         String str = NumberFormat.getNumberInstance(Locale.US).format(milkTea.getPrice());
-        viewHolder.tvPrice.setText( str + "đ");
+        viewHolder.tvPrice.setText(str + "đ");
         viewHolder.tvNumberOfOrders.setText(milkTea.getNumberOfOrders() + "+");
         Glide.with(context).load(milkTea.getImgSrc()).into(viewHolder.imvMilkTea);
 
@@ -66,10 +66,11 @@ public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHold
         return listMilkTea.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvDescribe, tvPrice, tvNumberOfOrders;
         View viewItemMilkTea;
         ImageView imvMilkTea, imvAdd;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name_milk_tea);
@@ -82,7 +83,7 @@ public class MilkTeaAdapter extends RecyclerView.Adapter<MilkTeaAdapter.ViewHold
         }
     }
 
-    public interface OnItemClickedListener{
+    public interface OnItemClickedListener {
         void onItemClick(MilkTea milkTea);
     }
 

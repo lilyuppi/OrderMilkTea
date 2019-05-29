@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
     private ArrayList<Fragment> arrayFragment = new ArrayList<>();
-    private ArrayList<String> arrayTittle =  new ArrayList<>();
+    private ArrayList<String> arrayTittle = new ArrayList<>();
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -24,7 +24,8 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return arrayFragment.size();
     }
-    public void addFragment(Fragment fragment,String tittle){
+
+    public void addFragment(Fragment fragment, String tittle) {
         arrayFragment.add(fragment);
         arrayTittle.add(tittle);
     }

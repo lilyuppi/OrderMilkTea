@@ -21,9 +21,9 @@ import com.example.ordermilktea.R;
 import java.util.ArrayList;
 
 public class HistoryFragment extends Fragment implements DataStoreCallBack {
-    View view;
-    RecyclerView recyclerView;
-    HistoryAdapter historyAdapter;
+    private View view;
+    private RecyclerView recyclerView;
+    private HistoryAdapter historyAdapter;
     DataFireBase dataFireBase;
 
     @Override

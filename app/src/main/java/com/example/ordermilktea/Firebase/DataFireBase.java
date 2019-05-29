@@ -58,6 +58,7 @@ public class DataFireBase {
     final private String DISCOUNT = "discount";
     final private String TOPPING = "topping";
     final private String NUMBER_OF_ORDERS = "number_of_orders";
+
     public DataFireBase(DataStoreCallBack dataStoreCallBack, Activity activity) {
         init();
         getInformationLogin(activity);
@@ -129,86 +130,89 @@ public class DataFireBase {
         });
 
 
-
-
     }
 
-    public void getHistory(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-        String pathHistory = "/" + LIST_USER + "/" + uid + "/" + HISTORY;
-        DatabaseReference refHistory = database.getReference(pathHistory);
-        refHistory.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+    public void getHistory() {
+        if (informationLogin.getIsLogined()) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                ArrayList<HistoryModel> historyModelArrayList = new ArrayList<>();
-                for (DataSnapshot historyFireBase : dataSnapshot.getChildren()) {
-                    HistoryModel historyModel = new HistoryModel();
-                    Log.d("historyid", historyFireBase.getKey());
-                    // get cart
-                    Cart cart = new Cart();
-                    int priceCart = historyFireBase.child(CART).child(PRICE).getValue(Integer.class);
-                    ArrayList<MilkTeaInCart> milkTeaInCartArrayList = new ArrayList<>();
-                    for (DataSnapshot milkTeaInCartFireBase : historyFireBase.child(CART).getChildren()) {
-                        if (milkTeaInCartFireBase.getKey().equals(PRICE)){
-                            continue;
-                        }
-                        MilkTeaInCart milkTeaInCart = new MilkTeaInCart();
-                        String nameMilk = milkTeaInCartFireBase.child(NAME).getValue(String.class);
-                        Log.d("hissss", priceCart + milkTeaInCartFireBase.getKey());
-                        int numOfOrders = milkTeaInCartFireBase.child(NUMBER_OF_ORDERS).getValue(Integer.class);
-                        int priceMilk = milkTeaInCartFireBase.child(PRICE).getValue(Integer.class);
-                        String toppingMilk = milkTeaInCartFireBase.child(TOPPING).getValue(String.class);
-                        milkTeaInCart.setName(nameMilk);
+            String uid = user.getUid();
+            String pathHistory = "/" + LIST_USER + "/" + uid + "/" + HISTORY;
+            DatabaseReference refHistory = database.getReference(pathHistory);
+            refHistory.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    ArrayList<HistoryModel> historyModelArrayList = new ArrayList<>();
+                    for (DataSnapshot historyFireBase : dataSnapshot.getChildren()) {
+                        HistoryModel historyModel = new HistoryModel();
+                        Log.d("historyid", historyFireBase.getKey());
+                        // get cart
+                        Cart cart = new Cart();
+                        int priceCart = historyFireBase.child(CART).child(PRICE).getValue(Integer.class);
+                        ArrayList<MilkTeaInCart> milkTeaInCartArrayList = new ArrayList<>();
+                        for (DataSnapshot milkTeaInCartFireBase : historyFireBase.child(CART).getChildren()) {
+                            if (milkTeaInCartFireBase.getKey().equals(PRICE)) {
+                                continue;
+                            }
+                            MilkTeaInCart milkTeaInCart = new MilkTeaInCart();
+                            String nameMilk = milkTeaInCartFireBase.child(NAME).getValue(String.class);
+                            Log.d("hissss", priceCart + milkTeaInCartFireBase.getKey());
+                            int numOfOrders = milkTeaInCartFireBase.child(NUMBER_OF_ORDERS).getValue(Integer.class);
+                            int priceMilk = milkTeaInCartFireBase.child(PRICE).getValue(Integer.class);
+                            String toppingMilk = milkTeaInCartFireBase.child(TOPPING).getValue(String.class);
+                            milkTeaInCart.setName(nameMilk);
 //                        milkTeaInCart.setNumberOfOrders(numOfOrders);
-                        milkTeaInCart.setPrice(priceMilk);
-                        milkTeaInCart.setListTopping(toppingMilk);
-                        milkTeaInCart.setNumberOfOrders(numOfOrders);
-                        milkTeaInCartArrayList.add(milkTeaInCart);
+                            milkTeaInCart.setPrice(priceMilk);
+                            milkTeaInCart.setListTopping(toppingMilk);
+                            milkTeaInCart.setNumberOfOrders(numOfOrders);
+                            milkTeaInCartArrayList.add(milkTeaInCart);
+                        }
+                        cart.setSumPrice(priceCart);
+                        cart.setListMilkTeaInCart(milkTeaInCartArrayList);
+                        historyModel.setCart(cart);
+                        // get information store
+                        String addStore = historyFireBase.child(INFO).child(ADDRESS).getValue(String.class);
+                        int phoneStore = historyFireBase.child(INFO).child(PHONE).getValue(Integer.class);
+                        Information informationStore = new Information(addStore, phoneStore);
+                        historyModel.setInformationStore(informationStore);
+                        // get information user
+                        User userFireBase = new User();
+                        String nameUser = (String) historyFireBase.child(USER).child(NAME).getValue();
+                        String addUser = (String) historyFireBase.child(USER).child(INFO).child(ADDRESS).getValue();
+                        String stringPhone = historyFireBase.child(USER).child(INFO).child(PHONE).getValue(String.class);
+                        int phoneUser;
+                        if (stringPhone.equals("")) {
+                            phoneUser = 0;
+                        } else {
+                            phoneUser = Integer.parseInt(stringPhone);
+                        }
+                        userFireBase.setName(nameUser);
+                        userFireBase.setInformation(new Information(addUser, phoneUser));
+                        historyModel.setUser(userFireBase);
+                        // get time order
+                        String timeOrder = (String) historyFireBase.child(TIMEORDER).getValue();
+                        historyModel.setTimeOrder(timeOrder);
+                        // get img store
+                        String imgStore = (String) historyFireBase.child(IMG).getValue();
+                        historyModel.setImgStore(imgStore);
+                        // get name store
+                        String nameStore = (String) historyFireBase.child(NAME).getValue();
+                        historyModel.setNameStore(nameStore);
+                        historyModelArrayList.add(historyModel);
+
                     }
-                    cart.setSumPrice(priceCart);
-                    cart.setListMilkTeaInCart(milkTeaInCartArrayList);
-                    historyModel.setCart(cart);
-                    // get information store
-                    String addStore = historyFireBase.child(INFO).child(ADDRESS).getValue(String.class);
-                    int phoneStore = historyFireBase.child(INFO).child(PHONE).getValue(Integer.class);
-                    Information informationStore = new Information(addStore, phoneStore);
-                    historyModel.setInformationStore(informationStore);
-                    // get information user
-                    User userFireBase = new User();
-                    String nameUser = (String) historyFireBase.child(USER).child(NAME).getValue();
-                    String addUser = (String) historyFireBase.child(USER).child(INFO).child(ADDRESS).getValue();
-                    String stringPhone = historyFireBase.child(USER).child(INFO).child(PHONE).getValue(String.class);
-                    int phoneUser;
-                    if (stringPhone.equals("")) {
-                        phoneUser = 0;
-                    }else{
-                        phoneUser = Integer.parseInt(stringPhone);
-                    }
-                    userFireBase.setName(nameUser);
-                    userFireBase.setInformation(new Information(addUser, phoneUser));
-                    historyModel.setUser(userFireBase);
-                    // get time order
-                    String timeOrder = (String) historyFireBase.child(TIMEORDER).getValue();
-                    historyModel.setTimeOrder(timeOrder);
-                    // get img store
-                    String imgStore = (String) historyFireBase.child(IMG).getValue();
-                    historyModel.setImgStore(imgStore);
-                    // get name store
-                    String nameStore = (String) historyFireBase.child(NAME).getValue();
-                    historyModel.setNameStore(nameStore);
-                    historyModelArrayList.add(historyModel);
+                    mDataStoreCallBack.onReceiveHistory(historyModelArrayList);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-                mDataStoreCallBack.onReceiveHistory(historyModelArrayList);
-            }
+            });
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
     }
 
     private void init() {
@@ -256,7 +260,7 @@ public class DataFireBase {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
         Date currentTime = Calendar.getInstance().getTime();
-        String idCart = currentTime.getYear() + "" + currentTime.getMonth()+ "" + currentTime.getDay() + "" + currentTime.getHours() + "" + currentTime.getMinutes()
+        String idCart = currentTime.getYear() + "" + currentTime.getMonth() + "" + currentTime.getDay() + "" + currentTime.getHours() + "" + currentTime.getMinutes()
                 + "" + currentTime.getSeconds() + "" + uid;
         Log.d("idCart", idCart);
 
@@ -295,10 +299,16 @@ public class DataFireBase {
     }
 
     private void randomListMilkTea(String nameStore, int number) {
-        String[] listName = {"Ô long dâu rừng", "Ô Long Đào Kem", "Lục Trà Đào", "Lục Trà Nhài", "Hồng Trà"};
+        String[] listName = {"Ô long dâu rừng", "Ô Long Đào Kem", "Lục Trà Đào", "Lục Trà Nhài", "Hồng Trà", "Trà Sữa Ổi", "Trà Xanh Kiwi", "Trà Đen Ô Mai", "Sữa Tươi Trân Châu Đường Đen",
+                "Trà Bóng Mưa", "Hồng Trà Sủi Bọt", "Trà Xanh Sủi Bọt", "Trà Alisan Sủi Bọt", "Trà Sữa Thiết Quan Âm", "Trà Ô Long Đào",
+                "Trà Quan Âm", "Cold Brew", "Caramel Macchiato", "Caffè Latte", "Caffè Americano", "Cappuccino", "Freeze Trà Xanh", "Trà Sen Vàng",
+                "Trà Thạch Vải", "Trà Sữa Khoai Lang", "Trà Xoài Macchiato", "Mattcha Trân Châu Đường Đen", "Trà Sữa Cheese", "Hồng Trà Sữa", "Trà Gạo Nhật Cheese"
+        };
         String web = "https://androidtimetable.000webhostapp.com/img/";
-        String[] listImgSrc = {web + "1.jpeg", web + "2.jpg", web + "3.jpg", web + "4.jpeg", web + "5.png", web + "6.jpg", web + "7.jpg", web + "8.png", web + "9.jpg", web + "10.jpg"};
-        int[] listPrice = {50000, 40000, 30000};
+        String[] listImgSrc = {web + "1.jpeg", web + "2.jpg", web + "3.jpg", web + "4.jpeg", web + "5.png", web + "6.jpg", web + "7.jpg", web + "8.png", web + "9.jpg", web + "10.jpg",
+                web + "11.jpg", web + "12.jpg", web + "13.jpg", web + "14.jpg", web + "15.jpg", web + "16.jpg", web + "17.jpg"
+        };
+        int[] listPrice = {50000, 40000, 30000, 55000, 45000, 35000, 55000, 60000};
         String[] listDescribe = {"mo ta", "cai gi mo ta", "mot hai ha"};
         int[] listNumberOfOrders = {100, 200, 300, 230};
         for (int i = 0; i < number; i++) {
@@ -316,13 +326,19 @@ public class DataFireBase {
     }
 
     private void randomListStore(int number) {
-        String[] listName = {"Starbuck", "Royal Tea", "Ding Tea", "Heeka", "Lee Tea"};
+        String[] listName = {"Starbuck", "Royal Tea", "Ding Tea", "Trà Sữa Heeka", "Lee Tea", "Tiger Sugar", "Trà Sữa GOATEA", "Cha Go Tea",
+                "Phúc Long Tea", "Juice Garden", "Bea Tea", "Trà Sữa House Of Cha", "Trà Sữa Tocotoco", "Trà Sữa Kenta Tea", "Soya Garden"
+        };
         String web = "https://androidtimetable.000webhostapp.com/img/";
-        String[] listImgSrc = {web + "1.jpeg", web + "2.jpg", web + "3.jpg", web + "4.jpeg", web + "5.png", web + "6.jpg", web + "7.jpg", web + "8.png", web + "9.jpg", web + "10.jpg"};
-        String[] listAddress = {"Sô 1 Phạm Ngọc Thạch", "Số 2 Phạm Văn Đồng", "Số 3 Xuân Thủy"};
-        int[] listPhoneNumber = {19008198, 19002090, 18003421};
-        int[] listDiscount = {10, 20, 30, 40};
-        int[] listNumberOfOrders = {100, 200, 300, 230};
+        String[] listImgSrc = {web + "1.jpeg", web + "2.jpg", web + "3.jpg", web + "4.jpeg", web + "5.png", web + "6.jpg", web + "7.jpg", web + "8.png", web + "9.jpg", web + "10.jpg",
+                web + "11.jpg", web + "12.jpg", web + "13.jpg", web + "14.jpg", web + "15.jpg", web + "16.jpg", web + "17.jpg"
+        };
+        String[] listAddress = {"Sô 1 Phạm Ngọc Thạch", "Số 2 Phạm Văn Đồng", "Số 3 Xuân Thủy", "116 Mai Dịch, Cầu Giấy", "6, Ngõ 63 Trần Quốc Vượng", "489 Hoàng Quốc Việt", "IPH Xuân Thủy", "Tầng 1 Vincom Trần Duy Hưng",
+                "107 Nguyễn Hoàng", "2 Nguyễn Đổng Chi", "118 Phú Diễn", "51 Xuân La, Tây Hồ", "93 Lê Văn Hiến", "54 Vũ Trọng Phụng"
+        };
+        int[] listPhoneNumber = {19008198, 19002090, 18003421, 19002949, 18001848, 18099988, 19028884};
+        int[] listDiscount = {10, 20, 30, 40, 45, 50, 25, 35};
+        int[] listNumberOfOrders = {100, 200, 300, 230, 1000, 600, 700, 500, 150, 450};
         for (int i = 0; i < number; i++) {
             int randomName = new Random().nextInt(listName.length);
             refListStore.child(i + "").child(NAME).setValue(listName[randomName]);
@@ -338,7 +354,7 @@ public class DataFireBase {
             refListStore.child(i + "").child(NUMBER_OF_ORDERS).setValue(listNumberOfOrders[randomNumberOfOrders]);
             refListStore.child(i + "").child(FREESHIP).setValue(true);
             refListStore.child(i + "").child(AIRPAY).setValue(true);
-            randomListMilkTea(i + "",20);
+            randomListMilkTea(i + "", 30);
         }
     }
 }

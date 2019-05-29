@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 
 public class MostOrderFragment extends Fragment {
-    View view;
-    RecyclerView recyclerView;
-    OrderAdapter orderAdapter;
+    private View view;
+    private RecyclerView recyclerView;
+    private OrderAdapter orderAdapter;
 
     ArrayList<Store> mListStore = new ArrayList<>();
 
@@ -29,8 +29,8 @@ public class MostOrderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view= inflater.inflate(R.layout.fragment_most_order, container, false);
-        recyclerView=view.findViewById(R.id.recyclerviewOrder);
+        view = inflater.inflate(R.layout.fragment_most_order, container, false);
+        recyclerView = view.findViewById(R.id.recyclerviewOrder);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -39,10 +39,10 @@ public class MostOrderFragment extends Fragment {
         /**
          *     Chi them 3 cai bat ky
          */
-        ArrayList<Store> list=new ArrayList<>();
-        for (int i = 0 ;i<mListStore.size();i++){
+        ArrayList<Store> list = new ArrayList<>();
+        for (int i = 0; i < mListStore.size(); i++) {
             list.add(mListStore.get(i));
-            if (i==10){
+            if (i == 10) {
                 break;
             }
         }
