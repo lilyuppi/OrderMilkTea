@@ -140,7 +140,7 @@ public class PayActivity extends AppCompatActivity implements DataStoreCallBack 
             @Override
             public void onClick(View view) {
                 MainActivity.main.finish();
-                informationLogin = new InformationLogin(activity);
+                informationLogin = new InformationLogin(MainActivity.main);
                 if (informationLogin.getIsLogined()) {
                     addCartToFireBase();
                     Intent intent = new Intent(PayActivity.this, SuccessActivity.class);

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class AboutFragment extends Fragment {
     private static final int MY_RESQUEST_CODE = 1111;
     List<AuthUI.IdpConfig> providers;
     private CircleImageView imvAvatar;
-    private View view, viewLogin;
+    private View view, viewLogin, viewPhone;
     private Button btnLogout, btnEditPhone;
     private EditText etPhone;
     private TextView tvName, tvPhone;
@@ -100,7 +101,6 @@ public class AboutFragment extends Fragment {
             }
         });
 
-
         return view;
     }
 
@@ -115,6 +115,7 @@ public class AboutFragment extends Fragment {
 
     private void map(View view) {
         mIsLogined = false;
+        isEditPhone = false;
         btnLogout = view.findViewById(R.id.btn_logout);
         btnEditPhone = view.findViewById(R.id.btn_edit_phone);
         btnEditPhone.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +130,7 @@ public class AboutFragment extends Fragment {
                     tvPhone.setVisibility(View.VISIBLE);
                     btnEditPhone.setText("Sửa");
                     informationLogin.setPhone("" + etPhone.getText());
+                    informationLogin.setSharedPre(true, user.getUid(), etPhone.getText() + "");
                     tvPhone.setText(etPhone.getText());
                 }
                 isEditPhone = !isEditPhone;
@@ -139,6 +141,8 @@ public class AboutFragment extends Fragment {
         tvPhone = view.findViewById(R.id.tv_phone_about_me);
         etPhone = view.findViewById(R.id.et_phone_about_me);
         viewLogin = view.findViewById(R.id.linearlayout_login);
+        viewPhone = view.findViewById(R.id.view_phone);
+        viewPhone.setVisibility(View.GONE);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,10 +156,10 @@ public class AboutFragment extends Fragment {
                                 imvAvatar.setImageResource(R.drawable.ic_account);
                                 tvName.setText("Đăng nhập");
                                 mIsLogined = false;
-                                etPhone.setVisibility(View.GONE);
-                                btnEditPhone.setVisibility(View.GONE);
-                                btnEditPhone.setText("Sửa");
-                                tvPhone.setVisibility(View.GONE);
+//                                etPhone.setVisibility(View.GONE);
+//                                btnEditPhone.setVisibility(View.GONE);
+//                                btnEditPhone.setText("Sửa");
+//                                tvPhone.setVisibility(View.GONE);
                                 informationLogin.setSharedPre(mIsLogined, "", "");
 //                                showSignInOptions();
                             }
@@ -194,19 +198,9 @@ public class AboutFragment extends Fragment {
     private void updateAfterLogin() {
         user = FirebaseAuth.getInstance().getCurrentUser();
         // get user
-        mIsLogined = true;
-        informationLogin.getPhoneNumberFromFireBase();
-        informationLogin.setOnReceived(new InformationLogin.OnReceived() {
-            @Override
-            public void onReceivecPhone(String phone) {
-                mPhone = phone;
-                informationLogin.setSharedPre(mIsLogined, user.getUid(), mPhone);
-            }
-        });
 
-        tvName.setText(user.getDisplayName() + "");
-        etPhone.setText(informationLogin.getPhone() + "");
-        tvPhone.setText(informationLogin.getPhone() + "");
+        Log.d("about", informationLogin.getIsLogined() + "");
+        mIsLogined = true;
         String facebookUserId = "";
 
         // find the Facebook profile and get the user's id
@@ -226,35 +220,34 @@ public class AboutFragment extends Fragment {
         // (optional) use Picasso to download and show to image
         Glide.with(getActivity().getApplicationContext()).load(photoUrl).into(imvAvatar);
 
-        tvPhone.setVisibility(View.VISIBLE);
-        btnEditPhone.setVisibility(View.VISIBLE);
         btnLogout.setVisibility(View.VISIBLE);
         viewLogin.setEnabled(false);
-        informationLogin.setSharedPre(mIsLogined, user.getUid(), mPhone);
-
+        Log.d("about", "update : " + user.getDisplayName() + "/" + informationLogin.getPhone());
         tvName.setText(user.getDisplayName() + "");
-        etPhone.setText(informationLogin.getPhone() + "");
-        tvPhone.setText(informationLogin.getPhone() + "");
+        informationLogin.setSharedPre(mIsLogined, user.getUid(), "");
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        etPhone.setVisibility(View.GONE);
-        isEditPhone = false;
+//        etPhone.setVisibility(View.GONE);
+//        isEditPhone = false;
         mIsLogined = informationLogin.getIsLogined();
+        Log.d("about", "resume : " + informationLogin.getUid() + informationLogin.getIsLogined());
         if (mIsLogined) {
 //            btnLogout.setVisibility(View.VISIBLE);
-            btnEditPhone.setText("Sửa");
+//            btnEditPhone.setText("Sửa");
+            viewLogin.setEnabled(false);
             updateAfterLogin();
         } else {
-
-            tvPhone.setVisibility(View.GONE);
-            btnEditPhone.setVisibility(View.GONE);
-            tvName.setVisibility(View.VISIBLE);
-            tvName.setText("Đăng nhập");
+            viewLogin.setEnabled(true);
+//            tvPhone.setVisibility(View.GONE);
+//            btnEditPhone.setVisibility(View.GONE);
+//            tvName.setVisibility(View.VISIBLE);
+//            tvName.setText("Đăng nhập");
         }
+
     }
 
 

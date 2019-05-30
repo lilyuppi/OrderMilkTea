@@ -19,7 +19,7 @@
         >
 
         <LinearLayout
-            android:background="#9C27B0"
+            android:background="#7B1FA2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -67,7 +67,7 @@
         >
 
         <LinearLayout
-            android:background="#9C27B0"
+            android:background="#7B1FA2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -117,7 +117,7 @@
         >
 
         <LinearLayout
-            android:background="#9C27B0"
+            android:background="#7B1FA2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -166,7 +166,7 @@
         >
 
         <LinearLayout
-            android:background="#9C27B0"
+            android:background="#7B1FA2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
