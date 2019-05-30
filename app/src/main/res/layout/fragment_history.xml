@@ -6,6 +6,12 @@
     tools:context=".Fragment.HistoryFragment"
     android:padding="5dp">
 
+    <TextView
+        android:id="@+id/tv_history_report"
+        android:text="Chưa có đơn hàng nào, vui lòng đặt hàng để hiển thị..."
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"

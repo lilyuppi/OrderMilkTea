@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.ordermilktea.Adapter.HistoryAdapter;
 import com.example.ordermilktea.Firebase.DataFireBase;
@@ -24,6 +25,7 @@ public class HistoryFragment extends Fragment implements DataStoreCallBack {
     private View view;
     private RecyclerView recyclerView;
     private HistoryAdapter historyAdapter;
+    private TextView tvReport;
     DataFireBase dataFireBase;
 
     @Override
@@ -31,6 +33,8 @@ public class HistoryFragment extends Fragment implements DataStoreCallBack {
                              @Nullable  Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view= inflater.inflate(R.layout.fragment_history, container, false);
+        tvReport = view.findViewById(R.id.tv_history_report);
+
         return view;
     }
 
@@ -40,6 +44,11 @@ public class HistoryFragment extends Fragment implements DataStoreCallBack {
 
     @Override
     public void onReceiveHistory(ArrayList<HistoryModel> historyModelArrayList) {
+        if (historyModelArrayList.size() == 0) {
+            tvReport.setVisibility(View.VISIBLE);
+        } else {
+            tvReport.setVisibility(View.GONE);
+        }
         recyclerView = view.findViewById(R.id.recycler_view_history);
         recyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false);
